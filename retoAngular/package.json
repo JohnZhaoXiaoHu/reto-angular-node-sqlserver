@@ -1,0 +1,16 @@
+{
+    "name": "reto-angular",
+    "main": "server.js",
+    "scripts": {
+      "start": "nodemon ./server"
+    },
+    "dependencies": {
+        "body-parser": "~1.0.1",
+        "cors": "2.8.1",
+        "express": "~4.0.0",
+        "mssql": "3.x"
+    },
+    "devDependencies": {
+        "nodemon": "^1.15.1"
+    }
+}
