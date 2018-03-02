@@ -49,7 +49,8 @@ var  executeQuery = function(respond, query){
                          request.query(query, function (err, res) {
                            if (err) {
                                       console.log("Error while querying database :- " + err);
-                                      respond.send(err);
+
+                                      respond.json("no se puedo crear el usuario");
                                      }
                                      else {
                                        console.log(res);
