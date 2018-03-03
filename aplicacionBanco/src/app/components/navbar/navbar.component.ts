@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import {PostService} from '../../../app/posts.service';
+import { NgForm, Form, FormGroup, FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-navbar',
@@ -9,6 +10,7 @@ import {PostService} from '../../../app/posts.service';
 
 })
 export class NavbarComponent implements OnInit {
+  
   clientes: Cliente[];
   mensaje1 = "Este campo es requerido";
   mensaje2 = "Este campo es requerido";
@@ -16,20 +18,15 @@ export class NavbarComponent implements OnInit {
   model:any = {};
   
   constructor( private postService:PostService){
-    
+
 
     this.postService.getPost().subscribe(posts=>{
     this.clientes= posts;
 
     });
   }
-  borrarcampos(){
-    this.model={};
-    this.mensaje1 = "Este campo es requerido";
-    this.mensaje2 = "Este campo es requerido";
-  }
 
-  insertarCliente(){
+  insertarCliente(form: NgForm){
     var seEncuetra=false;
     var i;
     var length = this.clientes.length;
@@ -50,12 +47,15 @@ export class NavbarComponent implements OnInit {
 
 
     if(!seEncuetra){
+      this.mensaje1 = "Este campo es requerido";
+      this.mensaje2 = "Este campo es requerido";
       this.postService.insertCliente(this.model).subscribe(posts=>{
         this.check= posts;
       });
-      
     }
-  
+  }
+  borrarForm(form: NgForm){
+    form.resetForm(); // or form.reset();
   }
 
   fechactual:string;
@@ -70,9 +70,13 @@ export class NavbarComponent implements OnInit {
       let fechaNacimiento:Date =new Date(this.fechaInput);
       console.log(new Date(((new Date().getFullYear()-18) + "/" + (new Date().getMonth() +1) + "/" + new Date().getDay()))<fechaNacimiento)
       
-  }
+  }    
+  
 
+ 
 }
+
+
 export interface Cliente {
   Nombre: string;
   Apellido: string;

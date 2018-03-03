@@ -22,7 +22,7 @@
         <form class="form-inline my-2 my-lg-0">
           <div class="container">
   
-            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarcampos()">Registrarse </button>
+            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm)">Registrarse </button>
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
           </div>
         </form>
@@ -30,7 +30,7 @@
     </div>
   </nav>
   
-  <div class="modal fade" id="registro" role="dialog">
+  <div class="modal fade" id="registro" role="dialog" >
     <div class="modal-dialog">
   
       <!-- Modal content-->
@@ -40,7 +40,7 @@
           <img class="mb-4" src="assets/imagenes/crear.png" alt="">
         </div>
         <div class="modal-body">
-          <form #frm="ngForm" (ngSubmit)="addUser(frm)">
+          <form #frm="ngForm" (submit)="addUser()">
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Nombre:
               </label>
@@ -107,9 +107,9 @@
             </div>
   
             <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Cliente:
+              <label for="recipient-name" class="form-control-label">Usuario:
               </label>
-              <input type="text" class="form-control" #userUser="ngModel" ngModel id="cliente" placeholder="Ingrese Cliente" name="client"
+              <input type="text" class="form-control" #userUser="ngModel" ngModel id="cliente" placeholder="Ingrese Usuario" name="client"
                 required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
             </div>
@@ -167,9 +167,10 @@
               <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
             </div>
             <div class="modal-footer">
-              <button type="submit" data-dismiss="modal" name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modal" id="crearCliente" (click)="insertarCliente()">Crear usuario</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            </div>
+              <button type="button"  name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" id="crearCliente" 
+              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente(frm) " data-dismiss="modal">Crear usuario</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frm)">Cerrar</button>
+            </div> 
           </form>
         </div>
   
