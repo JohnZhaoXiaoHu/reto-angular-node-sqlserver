@@ -78,8 +78,23 @@ app.get('/cliente', function (req, res) {
 
                 console.log(req.body);
 
-
-                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,Usuario,Contrasena,fecha_Nacimiento) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.Usuario  + "','" + req.body.Contrasena  + "','" + req.body.fecha_Nacimiento + "')";
+                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,fecha_Nacimiento,Usuario) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.fecha_Nacimiento  +  "','" + req.body.Usuario + "')";
                 executeQuery (res, query);
+
+});
+
+app.get('/solicitud', function (req, res) {
+  console.log("realizando peticion get");
+        var query = "select * from [Solicitud]";
+                 executeQuery (res, query);
+});
+
+app.post("/solicitud/create", function(req , res){
+               console.log("peticion post!!");
+
+               console.log(req.body);
+
+               var query = "INSERT INTO [Solicitud] (id_Usuario,Empresa,nit_Empresa,fecha_ingreso,Salario) VALUES ('" + req.body.id_Usuario + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_ingreso  +  "','" + req.body.Salario + "')";
+               executeQuery (res, query);
 
 });
