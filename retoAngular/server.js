@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "CPX-HQKYIJMGBEL\\SQLEXPRESS",
+    server: "localhost",
     database: "angular"
    };
 
@@ -41,7 +41,9 @@ var  executeQuery = function(respond,query){
          if (err) {
                      console.log("Error while connecting database :- " + err);
                      res.send(err);
-                  }else{
+                  }
+                  else{
+                    // create Request object
                     var request = new sql.Request();
                     // query to the database
                     request.query(query, function (err, res) {
@@ -75,13 +77,9 @@ app.get('/cliente', function (req, res) {
                 console.log("peticion post!!");
 
                 console.log(req.body);
-               
-                  
+
+
                 var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,Usuario,Contrasena,fecha_Nacimiento) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.Usuario  + "','" + req.body.Contrasena  + "','" + req.body.fecha_Nacimiento + "')";
                 executeQuery (res, query);
-                
+
 });
-
-
-
-
