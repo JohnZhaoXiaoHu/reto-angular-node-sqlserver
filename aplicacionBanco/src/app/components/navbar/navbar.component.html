@@ -1,0 +1,395 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+    <div class="container">
+      <a class="navbar-brand" href="#">BancoMelo</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+  
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">Servicios Cliente</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" data-toggle="modal" href="#Scredit">Solicitar Credito</a>
+              <a class="dropdown-item" href="#">Creditos aprobados</a>
+  
+            </div>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <div class="container">
+  
+            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarcampos()">Registrarse </button>
+            <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
+          </div>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="modal fade" id="registro" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+  
+          <img class="mb-4" src="assets/imagenes/crear.png" alt="">
+        </div>
+        <div class="modal-body">
+          <form #frm="ngForm" (ngSubmit)="addUser(frm)">
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Nombre:
+              </label>
+              <input type="text" name="name" class="form-control" #nameUser="ngModel" ngModel required pattern="[a-zA-Z]*" id="nombre"
+                placeholder="Ingrese Nombre" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" [(ngModel)]="model.Nombre">
+              <p id="Nombre"></p>
+            </div>
+  
+            <div *ngIf="nameUser?.touched">
+              <div *ngIf="nameUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="nameUser?.dirty">
+  
+              <div *ngIf="nameUser.errors?.pattern" class="alert alert-danger">
+  
+                Nombre no valido. Ingrese solo letras
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Apellido:
+              </label>
+              <input type="text" name="lastname" class="form-control" #lastnameUser="ngModel" ngModel required pattern="[a-zA-Z]*" id="apellido"
+                placeholder="Ingrese Apellido" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" [(ngModel)]="model.Apellido">
+              <p id="Apellido"></p>
+            </div>
+  
+            <div *ngIf="lastnameUser?.touched">
+              <div *ngIf="lastnameUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="lastnameUser?.dirty">
+  
+              <div *ngIf="lastnameUser.errors?.pattern" class="alert alert-danger">
+  
+                Apellido no valido. Ingrese solo letras
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Cedula
+              </label>
+              <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cedula"
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula">
+              <p id="cedula"></p>
+            </div>
+  
+            <div *ngIf="cedUser?.touched">
+              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensaje1}}</div>
+            </div>
+  
+            <div *ngIf="cedUser?.dirty">
+  
+              <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
+  
+                Cedula no valida. Ingrese solo números
+              </div>
+  
+              <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
+  
+                Ingrese su cedula completa
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Cliente:
+              </label>
+              <input type="text" class="form-control" #userUser="ngModel" ngModel id="cliente" placeholder="Ingrese Cliente" name="client"
+                required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
+              <p id="Cliente"></p>
+            </div>
+  
+            <div *ngIf="userUser?.touched">
+              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> {{mensaje2}} </div>
+            </div>
+  
+            <div *ngIf="userUser?.dirty">
+  
+              <div *ngIf="userUser.errors?.pattern" class="alert alert-danger">
+  
+                Usuario no valido. Ingrese solo letra y números
+              </div>
+  
+              <div *ngIf="!userUser.errors?.pattern && !userUser.errors?.required && userUser.errors?.minlength" class="alert alert-warning">
+  
+                El usuario debe contener mínimo 5 letras o números
+              </div>
+            </div>
+  
+            <!-- <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Contraseña:
+              </label>
+              <input type="password" class="form-control" #passUser="ngModel" ngModel id="Contraseña" placeholder="Ingrese Contraseña"
+                name="pass" required title="Solo debe ingresar letras y números" pattern="[0-9a-zA-ZñÑ]*" minlength="5">
+              <p id="Contraseña"></p>
+            </div> -->
+  
+            <!-- <div *ngIf="passUser?.touched">
+              <div *ngIf="passUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="passUser?.dirty">
+  
+              <div *ngIf="passUser.errors?.pattern" class="alert alert-danger">
+  
+                Contraseña no valida. Ingrese solo letra y números
+              </div>
+  
+              <div *ngIf="!passUser.errors?.pattern && !passUser.errors?.required && passUser.errors?.minlength" class="alert alert-warning">
+  
+                La contraseña no es segura
+              </div>
+            </div> -->
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Fecha de nacimiento:</label>
+              <input type="date" name="fecha" max="{{fechactual}}" #calUser="ngModel" ngModel id="calendar" [(ngModel)]="model.fecha_Nacimiento" (change)="onChangeFecha()"
+                required>
+              <p id="fecha"></p>
+            </div>
+  
+            <div *ngIf="calUser?.touched">
+              <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" data-dismiss="modal" name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Modal" id="crearCliente" (click)="insertarCliente()">Crear usuario</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+    
+<div class="modal fade" id="Modal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p>Usuario guardado exitosamente</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+ 
+
+  
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+  
+          <img class="mb-4" src="assets/imagenes/login.png" alt="">
+        </div>
+        <div class="modal-body">
+          <form #frml="ngForm" (ngSubmit)="Login(frml)">
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Usuario:
+              </label>
+              <input type="text" class="form-control" #userlUser="ngModel" ngModel id="usuario" placeholder="Ingrese Usuario" name="user"
+                required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5">
+              <p id="Usuario"></p>
+            </div>
+  
+            <div *ngIf="userlUser?.touched">
+              <div *ngIf="userlUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="userlUser?.dirty">
+  
+              <div *ngIf="userlUser.errors?.pattern" class="alert alert-danger">
+  
+                Usuario no valido. Ingrese solo letra y números
+              </div>
+  
+              <div *ngIf="!userlUser.errors?.pattern && !userlUser.errors?.required && userlUser.errors?.minlength" class="alert alert-warning">
+  
+                El usuario debe contener mínimo 5 letras o números
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Contraseña:
+              </label>
+              <input type="password" class="form-control" #passlUser="ngModel" ngModel id="Contraseña" placeholder="Ingrese Contraseña"
+                name="pass" required title="Solo debe ingresar letras y números" pattern="[0-9a-zA-ZñÑ]*" minlength="5">
+              <p id="Contraseña"></p>
+            </div>
+  
+            <div *ngIf="passlUser?.touched">
+              <div *ngIf="passlUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="passlUser?.dirty">
+  
+              <div *ngIf="passlUser.errors?.pattern" class="alert alert-danger">
+  
+                Contraseña no valida. Ingrese solo letra y números
+              </div>
+  
+              <div *ngIf="!passlUser.errors?.pattern && !passlUser.errors?.required && passlUser.errors?.minlength" class="alert alert-warning">
+  
+                La contraseña no es segura
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" [disabled]="frml.invalid" id="crearCiudad">Ingresar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+  
+  </div>
+  
+  <div class="modal fade" id="Scredit" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Solicitud de credito</h4>
+        </div>
+        <div class="modal-body">
+          <form #frms="ngForm" (ngSubmit)="Login(frms)">
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Cliente:
+              </label>
+  
+              <div class="row">
+                <div class="col-sm-3">
+                  <select class="form-control">
+  
+                    <option>Cliente a solicitar el credito</option>
+  
+                  </select>
+                </div>
+              </div>
+  
+            </div>
+  
+            <div *ngIf="usersUser?.touched">
+              <div *ngIf="usersUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="usersUser?.dirty">
+  
+              <div *ngIf="usersUser.errors?.pattern" class="alert alert-danger">
+  
+                Usuario no valido. Ingrese solo letra y números
+              </div>
+  
+              <div *ngIf="!usersUser.errors?.pattern && !usersUser.errors?.required && usersUser.errors?.minlength" class="alert alert-warning">
+  
+                El usuario debe contener mínimo 5 letras o números
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Empresa:
+              </label>
+              <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="nombre2" placeholder="Ingrese nombre de la empresa"
+                name="nombre_Empresa" required title="Nombre de la empresa">
+              <p id="NEmp"></p>
+            </div>
+  
+            <div *ngIf="EmpCli?.touched">
+              <div *ngIf="EmpCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Nit Empresa:
+              </label>
+              <input type="text" class="form-control" id="apellido2" name="nit_Empresa" required minlength="10" maxlength="10" pattern="[0-9]*"
+                title="Solo debe ingresar números" ngModel #NitCli="ngModel" placeholder="Ingrese Nit de la empresa">
+              <p id="nit"></p>
+            </div>
+  
+            <div *ngIf="NitCli?.touched">
+              <div *ngIf="NitCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="NitCli?.dirty">
+  
+              <div *ngIf="NitCli.errors?.pattern" class="alert alert-danger">
+  
+                Nit no valido. Ingrese solo números
+              </div>
+  
+              <div *ngIf="!NitCli.errors?.pattern && !NitCli.errors?.required && NitCli.errors?.minlength" class="alert alert-warning">
+  
+                Ingrese el Nit completo
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Salario actual:
+              </label>
+              <input #moneyCli="ngModel" ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario" name="salario"
+                required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*">
+              <p id="money"></p>
+            </div>
+  
+            <div *ngIf="moneyCli?.touched">
+              <div *ngIf="moneyCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div *ngIf="moneyCli?.dirty">
+  
+              <div *ngIf="moneyCli.errors?.pattern" class="alert alert-danger">
+  
+                Salario no valido. Ingrese solo números enteros y positivos
+              </div>
+            </div>
+  
+            <div class="form-group">
+              <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
+              <input type="date" name="fecha" max="2018-02-27" step="2" #dateCli="ngModel" ngModel required>
+              <p id="fecha"></p>
+            </div>
+  
+            <div *ngIf="dateCli?.touched">
+              <div *ngIf="dateCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" id="realizarSolicitud" [disabled]="frms.invalid">Realizar Solicitud</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            </div>
+          </form>
+        </div>
+  
+      </div>
+    </div>
+
+    
