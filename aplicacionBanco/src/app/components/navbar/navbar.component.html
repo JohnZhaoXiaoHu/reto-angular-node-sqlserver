@@ -284,35 +284,27 @@
           <form #frms="ngForm" (ngSubmit)="Login(frms)">
   
             <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Cliente:
+              <label for="recipient-name" class="form-control-label">Cedula
               </label>
-  
-              <div class="row">
-                <div class="col-sm-3">
-                  <select class="form-control">
-  
-                    <option>Cliente a solicitar el credito</option>
-  
-                  </select>
-                </div>
-              </div>
-  
+              <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cedula"
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula">
+              <p id="cedula"></p>
             </div>
   
-            <div *ngIf="usersUser?.touched">
-              <div *ngIf="usersUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="cedUser?.touched">
+              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensaje1}}</div>
             </div>
   
-            <div *ngIf="usersUser?.dirty">
+            <div *ngIf="cedUser?.dirty">
   
-              <div *ngIf="usersUser.errors?.pattern" class="alert alert-danger">
+              <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
   
-                Usuario no valido. Ingrese solo letra y números
+                Cedula no valida. Ingrese solo números
               </div>
   
-              <div *ngIf="!usersUser.errors?.pattern && !usersUser.errors?.required && usersUser.errors?.minlength" class="alert alert-warning">
+              <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
   
-                El usuario debe contener mínimo 5 letras o números
+                Ingrese su cedula completa
               </div>
             </div>
   
