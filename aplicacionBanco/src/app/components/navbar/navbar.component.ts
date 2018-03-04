@@ -71,9 +71,7 @@ export class NavbarComponent implements OnInit {
       console.log(new Date(((new Date().getFullYear()-18) + "/" + (new Date().getMonth() +1) + "/" + new Date().getDay()))<fechaNacimiento)
       
   }    
-  
-
- 
+   
 }
 
 
