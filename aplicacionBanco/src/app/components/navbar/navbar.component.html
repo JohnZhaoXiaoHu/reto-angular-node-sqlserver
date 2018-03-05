@@ -287,12 +287,12 @@
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
               <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula2">
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model2.Cedula">
               <p id="cedula2"></p>
             </div>
   
             <div *ngIf="ced2User?.touched">
-              <div *ngIf="ced2User.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+              <div *ngIf="ced2User.errors?.required" class="alert alert-danger">{{mensaje3}}</div>
             </div>
   
             <div *ngIf="ced2User?.dirty">
@@ -312,7 +312,7 @@
               <label for="recipient-name" class="form-control-label">Empresa:
               </label>
               <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="nombre2" placeholder="Ingrese nombre de la empresa"
-                name="nombre_Empresa" required title="Nombre de la empresa">
+                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" >
               <p id="NEmp"></p>
             </div>
   
@@ -324,7 +324,7 @@
               <label for="recipient-name" class="form-control-label">Nit Empresa:
               </label>
               <input type="text" class="form-control" id="apellido2" name="nit_Empresa" required minlength="10" maxlength="10" pattern="[0-9]*"
-                title="Solo debe ingresar números" ngModel #NitCli="ngModel" placeholder="Ingrese Nit de la empresa">
+                title="Solo debe ingresar números" ngModel #NitCli="ngModel" placeholder="Ingrese Nit de la empresa" [(ngModel)]="model2.nit_Empresa">
               <p id="nit"></p>
             </div>
   
@@ -349,7 +349,7 @@
               <label for="recipient-name" class="form-control-label">Salario actual:
               </label>
               <input #moneyCli="ngModel" ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario" name="salario"
-                required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*">
+                required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*" [(ngModel)]="model2.Salario">
               <p id="money"></p>
             </div>
   
@@ -367,7 +367,7 @@
   
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
-              <input type="date" name="fecha" max="2018-02-27" step="2" #dateCli="ngModel" ngModel required>
+              <input type="date" name="fecha" max="2018-02-27" step="2" #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
               <p id="fecha"></p>
             </div>
   
@@ -376,7 +376,7 @@
             </div>
   
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" id="realizarSolicitud" [disabled]="frms.invalid">Realizar Solicitud</button>
+              <button type="button" class="btn btn-primary" id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud()" >Realizar Solicitud</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frms)">Cerrar</button>
             </div>
           </form>

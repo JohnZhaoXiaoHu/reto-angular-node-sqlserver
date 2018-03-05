@@ -20,13 +20,14 @@ export class NavbarComponent implements OnInit {
   clientes: Cliente[];
   mensaje1 = "Este campo es requerido";
   mensaje2 = "Este campo es requerido";
+  mensaje3="Este campo es requerido";
   check: Cliente;
   model:any = {};
   model2:any= {};
   check2:Solicitud;
   seEncuetraCedula:boolean = false;
   seEncuetraUsuario:boolean = false;
-  
+  seEncuentraCedulaSolicitud:boolean=false;
   constructor( private postService:PostService){
 
 
@@ -37,6 +38,27 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarSolicitud(){
+    for (var i = 0; i < this.clientes.length; i++) {
+
+      if(this.model2.Cedula == this.clientes[i].Cedula){
+        this.seEncuentraCedulaSolicitud=true;
+      }
+    }
+
+    if(this.seEncuentraCedulaSolicitud){
+      this.postService.insertSolicitud(this.model2).subscribe(posts=>{
+        console.log(posts);
+        this.check2= posts;
+        console.log("solicitud creada exitosamente!!");
+      });
+      this.seEncuentraCedulaSolicitud=false;
+    }else{
+      this.model2.Cedula="";
+      this.mensaje3="No se encuetra registrada la cedula en el sistema!!";
+    }
+
+
+
 
   }
 
