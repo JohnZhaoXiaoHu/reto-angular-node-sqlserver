@@ -286,23 +286,23 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
-              <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula">
-              <p id="cedula"></p>
+              <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cedula"
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula2">
+              <p id="cedula2"></p>
             </div>
   
-            <div *ngIf="cedUser?.touched">
-              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensaje1}}</div>
+            <div *ngIf="ced2User?.touched">
+              <div *ngIf="ced2User.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
             </div>
   
-            <div *ngIf="cedUser?.dirty">
+            <div *ngIf="ced2User?.dirty">
   
-              <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
+              <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger">
   
                 Cedula no valida. Ingrese solo números
               </div>
   
-              <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
+              <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning">
   
                 Ingrese su cedula completa
               </div>
