@@ -94,7 +94,7 @@ app.post("/solicitud/create", function(req , res){
 
                console.log(req.body);
 
-               var query = "INSERT INTO [Solicitud] (Cedula,Empresa,nit_Empresa,fecha_ingreso,Salario) VALUES ('" + req.body.Cedula + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_ingreso  +  "','" + req.body.Salario + "')";
+               var query = "INSERT INTO [Solicitud] (Cedula,Empresa,nit_Empresa,fecha_Ingreso,Salario) VALUES ('" + req.body.Cedula + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_Ingreso  +  "','" + req.body.Salario + "')";
                executeQuery (res, query);
 });
 

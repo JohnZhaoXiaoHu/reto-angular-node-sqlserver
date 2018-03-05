@@ -38,6 +38,7 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarSolicitud(){
+    
     for (var i = 0; i < this.clientes.length; i++) {
 
       if(this.model2.Cedula == this.clientes[i].Cedula){
