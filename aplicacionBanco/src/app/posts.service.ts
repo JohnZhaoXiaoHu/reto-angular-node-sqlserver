@@ -5,7 +5,8 @@ import 'rxjs/add/operator/map';
 
 import { Observable } from 'rxjs/Observable';
 import { Cliente } from './app.component'
-
+import { Solicitud } from './app.component'
+import { Credito } from './app.component'
 
 
 @Injectable()
@@ -19,5 +20,20 @@ export class PostService {
   insertCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>('http://localhost:8080/cliente/create', cliente);
   }
+
+  getCredito(): Observable<Credito[]> {
+    return this.http.get<Credito[]>('http://localhost:8080/credito');
+  }
+  
+  insertCredito(credito: Credito): Observable<Credito> {
+    return this.http.post<Credito>('http://localhost:8080/credito/create', credito);
+  }
+
+
+  insertSolicitud(solicitud: Solicitud): Observable<Solicitud> {
+    return this.http.post<Solicitud>('http://localhost:8080/solicitud/create', solicitud);
+  }
+
+
 
 }

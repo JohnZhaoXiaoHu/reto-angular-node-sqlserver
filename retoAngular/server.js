@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "192.168.1.57",
+    server: "CPX-HQKYIJMGBEL\\SQLEXPRESS",
     database: "angular"
    };
 
@@ -94,7 +94,24 @@ app.post("/solicitud/create", function(req , res){
 
                console.log(req.body);
 
-               var query = "INSERT INTO [Solicitud] (id_Usuario,Empresa,nit_Empresa,fecha_ingreso,Salario) VALUES ('" + req.body.id_Usuario + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_ingreso  +  "','" + req.body.Salario + "')";
+               var query = "INSERT INTO [Solicitud] (Cedula,Empresa,nit_Empresa,fecha_ingreso,Salario) VALUES ('" + req.body.Cedula + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_ingreso  +  "','" + req.body.Salario + "')";
                executeQuery (res, query);
+});
 
+
+app.post("/credito/create", function(req , res){
+  console.log("peticion post!!");
+
+  console.log(req.body);
+
+  var query = "INSERT INTO [Credito] (nit_Empresa,Cedula,Cantidad) VALUES ('" + req.body.nit_Empresa+ "','" + req.body.Cedula + "','" + req.body.Cantidad  + "')";
+  executeQuery (res, query);
+});
+
+
+
+app.get('/credito', function (req, res) {
+  console.log("realizando peticion get");
+        var query = "select * from [Credito]";
+                 executeQuery (res, query);
 });

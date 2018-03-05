@@ -47,3 +47,19 @@ export interface Cliente {
   fecha_Nacimiento: string;
   Usuario: string;
 }
+
+
+export interface Solicitud {
+  Cedula: string;
+  Empresa: string;
+  nit_Empresa: string;
+  fecha_Ingreso: string;
+  Salario: string;
+}
+
+export interface Credito {
+  nit_Empresa: string;
+  Cedula: string;
+  Cantidad: string;
+}
+

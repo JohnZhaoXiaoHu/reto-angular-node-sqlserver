@@ -1,6 +1,9 @@
 import { Component, ViewChild, OnInit } from '@angular/core';
 import {PostService} from '../../../app/posts.service';
 import { NgForm, Form, FormGroup, FormsModule} from '@angular/forms';
+import {Cliente} from  '../../../app/app.component';
+import {Solicitud} from  '../../../app/app.component';
+import {Credito} from  '../../../app/app.component';
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +22,8 @@ export class NavbarComponent implements OnInit {
   mensaje2 = "Este campo es requerido";
   check: Cliente;
   model:any = {};
+  model2:any= {};
+  check2:Solicitud;
   seEncuetraCedula:boolean = false;
   seEncuetraUsuario:boolean = false;
   
@@ -29,6 +34,10 @@ export class NavbarComponent implements OnInit {
     this.clientes= posts;
 
     });
+  }
+
+  insertarSolicitud(){
+
   }
 
   insertarCliente(form: NgForm){
@@ -95,11 +104,3 @@ export class NavbarComponent implements OnInit {
    
 }
 
-
-export interface Cliente {
-  Nombre: string;
-  Apellido: string;
-  Cedula: string;
-  fecha_Nacimiento: string;
-  Usuario: string;
-}
