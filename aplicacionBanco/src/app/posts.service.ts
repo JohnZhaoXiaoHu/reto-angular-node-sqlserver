@@ -15,6 +15,7 @@ export class PostService {
   getPost(): Observable<Cliente[]> {
     return this.http.get<Cliente[]>('http://localhost:8080/cliente');
   }
+  
   insertCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.post<Cliente>('http://localhost:8080/cliente/create', cliente);
   }

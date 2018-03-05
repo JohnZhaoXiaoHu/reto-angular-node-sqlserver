@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {HttpClient} from  '@angular/common/http';
 import {PostService} from './posts.service';
 
 
@@ -37,6 +38,8 @@ export class AppComponent {
 }
 */
 }
+
+
 export interface Cliente {
   Nombre: string;
   Apellido: string;
