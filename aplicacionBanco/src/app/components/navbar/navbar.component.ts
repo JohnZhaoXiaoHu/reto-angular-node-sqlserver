@@ -28,7 +28,10 @@ export class NavbarComponent implements OnInit {
   seEncuetraCedula:boolean = false;
   seEncuetraUsuario:boolean = false;
   seEncuentraCedulaSolicitud:boolean=false;
-
+  nit1:string;
+  nit2:string;
+  nit3:string;
+  nit4:string;
 
   constructor( private postService:PostService){
 
@@ -39,8 +42,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+
+
   insertarSolicitud(){
     
+    this.model2.nit_Empresa=this.nit1+""+this.nit2+""+this.nit3+"-"+this.nit4;
+    console.log("nit de la empresa:"+this.model2.nit_Empresa);
     for (var i = 0; i < this.clientes.length; i++) {
 
       if(this.model2.Cedula == this.clientes[i].Cedula){

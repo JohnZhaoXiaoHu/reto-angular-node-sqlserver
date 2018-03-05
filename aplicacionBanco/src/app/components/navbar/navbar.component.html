@@ -324,31 +324,48 @@
             <div *ngIf="EmpCli?.touched">
               <div *ngIf="EmpCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
             </div>
-  
+
+            <!-- inicio  campo del nit de la empresa -->
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Nit Empresa:
               </label>
-              <input type="text" class="form-control" id="apellido2" name="nit_Empresa" required minlength="10" maxlength="10" pattern="[0-9]*"
-                title="Solo debe ingresar números" ngModel #NitCli="ngModel" placeholder="Ingrese Nit de la empresa" [(ngModel)]="model2.nit_Empresa">
+        
+              <br>
+              <input type="serialnumber" [(ngModel)]="nit1"  style="width:35px;height:30px" id="NIT0" name="nit_Empresa0" minlength="3" maxlength="3" pattern="[0-9]*"
+              title="Solo debe ingresar números" ngModel #NitCli0="ngModel" (change)="cambioNit1()" required> -
+              <input type="serialnumber" (change)="cambioNit2()" [(ngModel)]="nit2" style="width:35px;height:30px" id="NIT1" name="nit_Empresa1" minlength="3" maxlength="3" pattern="[0-9]*"
+              title="Solo debe ingresar números" ngModel #NitCli1="ngModel" required> -
+              <input type="serialnumber" (change)="cambioNit3()" [(ngModel)]="nit3" style="width:35px;height:30px" id="NIT2" name="nit_Empresa2" minlength="3" maxlength="3" pattern="[0-9]*"
+              title="Solo debe ingresar números" ngModel #NitCli2="ngModel" required> -
+              <input type="serialnumber" (change)="cambioNit4()" [(ngModel)]="nit4" style="width:15px;height:30px" id="NIT3" name="nit_Empresa3" minlength="1" maxlength="1" pattern="[0-9]*"
+              title="Solo debe ingresar números" ngModel #NitCli3="ngModel" required> 
+              
               <p id="nit"></p>
             </div>
-  
-            <div *ngIf="NitCli?.touched">
-              <div *ngIf="NitCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+              <!-- fin campo del nit de la empresa -->
+
+            <!-- inicio  validaciones del nit de la emprsa -->
+            <div *ngIf="NitCli0?.touched || NitCli1?.touched || NitCli2?.touched || NitCli3?.touched">
+              <div *ngIf="NitCli0.errors?.required || NitCli1.errors?.required || NitCli2.errors?.required || NitCli3.errors?.required "
+                class="alert alert-danger"> Este campo es requerido</div>
             </div>
   
-            <div *ngIf="NitCli?.dirty">
+            <div *ngIf="NitCli0.dirty || NitCli1.dirty || NitCli2.dirty || NitCli3.dirty">
   
-              <div *ngIf="NitCli.errors?.pattern" class="alert alert-danger">
+              <div *ngIf="NitCli0.errors?.pattern || NitCli1.errors?.pattern || NitCli2.errors?.pattern || NitCli3.errors?.pattern" class="alert alert-danger">
   
                 Nit no valido. Ingrese solo números
               </div>
   
-              <div *ngIf="!NitCli.errors?.pattern && !NitCli.errors?.required && NitCli.errors?.minlength" class="alert alert-warning">
+              <div *ngIf="!NitCli0.errors?.pattern && !NitCli0.errors?.required && NitCli0.errors?.minlength || !NitCli1.errors?.pattern && !NitCli1.errors?.required && NitCli1.errors?.minlength || !NitCli2.errors?.pattern && !NitCli2.errors?.required && NitCli2.errors?.minlength || !NitCli3.errors?.pattern && !NitCli3.errors?.required && NitCli3.errors?.minlength"
+                class="alert alert-warning">
   
                 Ingrese el Nit completo
               </div>
             </div>
+  
+      
+            <!-- fin validaciones nit empresa -->
   
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Salario actual:
