@@ -21,6 +21,7 @@ export class NavbarComponent implements OnInit {
   mensaje1 = "Este campo es requerido";
   mensaje2 = "Este campo es requerido";
   mensaje3="Este campo es requerido";
+  mensaje4="";
   check: Cliente;
   model:any = {};
   model2:any= {};
@@ -48,7 +49,7 @@ export class NavbarComponent implements OnInit {
 
 
   insertarSolicitud(){
-    
+    this.mensaje4="";
     this.model2.nit_Empresa=this.nit1+""+this.nit2+""+this.nit3+"-"+this.nit4;
     console.log("nit de la empresa:"+this.model2.nit_Empresa);
     for (var i = 0; i < this.clientes.length; i++) {
@@ -62,7 +63,22 @@ export class NavbarComponent implements OnInit {
       this.postService.insertSolicitud(this.model2).subscribe(posts=>{
         console.log(posts);
         this.check2= posts;
-        console.log("solicitud creada exitosamente!!");
+
+        if(this.antiguedadAñoYmedio() && this.model2.Salario >=800000){
+          this.mensaje4="Credito aceptado";
+          if(this.model2.Salario>=800000 && this.model2.Salario <1000000){
+              this.mensaje4+="\n por el monto de 5000000";
+          }else if(this.model2.Salario>=1000000 && this.model2.Salario <4000000){
+            this.mensaje4+="\n por el monto de 20000000";
+          }else if(this.model2.Salario >=4000000){
+            this.mensaje4+="\n por el monto de 50000000";
+          }
+          console.log("solicitud creada exitosamente!!");
+        }else{
+          this.mensaje4="Credito no aceptado";
+        }
+
+       
       });
       this.seEncuentraCedulaSolicitud=false;
     }else{
@@ -76,7 +92,7 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarCliente(form: NgForm){
-
+      this.mensaje4="";
 
     for (var i = 0; i < this.clientes.length; i++) {
 
@@ -97,6 +113,7 @@ export class NavbarComponent implements OnInit {
       this.postService.insertCliente(this.model).subscribe(posts=>{
         console.log(posts);
         this.check= posts;
+        this.mensaje4="Cliente ingresado exitosamente!!"
       });
     }
     
@@ -172,7 +189,37 @@ export class NavbarComponent implements OnInit {
     }
 
 
-  }    
+  }
+
+
+
+  vte:boolean;
+  fecha3:Date;
+antiguedadAñoYmedio(): boolean {
+ 
+console.log(this.model2.fecha_Ingreso);
+let fecha: Date = new Date(this.model2.fecha_Ingreso);
+
+console.log(fecha);
+
+console.log("mes:"+new Date().getMonth());
+
+if(new Date().getMonth()<6){
+  console.log("mes:"+new Date().getMonth());
+  let fecha2:Date=new Date(((new Date().getFullYear() - 2) + "/" + (12-(6-(new Date().getMonth()+1)) + "/" + new Date().getDate())));
+  console.log(6-(new Date().getMonth()+1));
+  console.log(fecha2);
+  this.vte = (new Date(((new Date().getFullYear() - 2) + "/" + (12-(6-(new Date().getMonth()+1)) + "/" + new Date().getDate())))) > fecha)
+}else{
+  this.vte = (new Date(((new Date().getFullYear() - 1) + "/" + (new Date().getMonth()-6) + "/" + new Date().getDate())) > fecha)
+}
+
+
+console.log(this.vte);
+return this.vte;
+} 
+ 
+
    
 }
 
