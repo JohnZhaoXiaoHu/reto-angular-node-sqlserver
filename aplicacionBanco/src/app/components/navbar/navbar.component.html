@@ -337,11 +337,11 @@
         
               <br>
               <input type="serialnumber" [(ngModel)]="nit1"  style="width:35px;height:30px" id="NIT0" name="nit_Empresa0" minlength="3" maxlength="3" pattern="[0-9]*"
-              title="Solo debe ingresar números" ngModel #NitCli0="ngModel" (change)="cambioNit1()" required> -
+              title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT1.focus()" ngModel #NitCli0="ngModel" (change)="cambioNit1()" required> .
               <input type="serialnumber" (change)="cambioNit2()" [(ngModel)]="nit2" style="width:35px;height:30px" id="NIT1" name="nit_Empresa1" minlength="3" maxlength="3" pattern="[0-9]*"
-              title="Solo debe ingresar números" ngModel #NitCli1="ngModel" required> -
+              title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT2.focus()" ngModel #NitCli1="ngModel" required > .
               <input type="serialnumber" (change)="cambioNit3()" [(ngModel)]="nit3" style="width:35px;height:30px" id="NIT2" name="nit_Empresa2" minlength="3" maxlength="3" pattern="[0-9]*"
-              title="Solo debe ingresar números" ngModel #NitCli2="ngModel" required> -
+              title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT3.focus()" ngModel #NitCli2="ngModel" required> -
               <input type="serialnumber" (change)="cambioNit4()" [(ngModel)]="nit4" style="width:15px;height:30px" id="NIT3" name="nit_Empresa3" minlength="1" maxlength="1" pattern="[0-9]*"
               title="Solo debe ingresar números" ngModel #NitCli3="ngModel" required> 
               
