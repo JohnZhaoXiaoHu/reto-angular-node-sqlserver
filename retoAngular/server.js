@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "CPX-HQKYIJMGBEL\\SQLEXPRESS",
+    server: "192.168.3.106",
     database: "angular"
    };
 
@@ -78,7 +78,7 @@ app.get('/cliente', function (req, res) {
 
                 console.log(req.body);
 
-                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,fecha_Nacimiento,Usuario) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.fecha_Nacimiento  +  "','" + req.body.Usuario + "')";
+                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,Usuario,fecha_Nacimiento) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.Usuario  +  "','" + req.body.fecha_Nacimiento + "')";
                 executeQuery (res, query);
 
 });

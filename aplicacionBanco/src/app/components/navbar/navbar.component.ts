@@ -38,12 +38,11 @@ export class NavbarComponent implements OnInit {
   fechactual1:string;
 
   constructor( private postService:PostService){
-
-
+    /*
     this.postService.getPost().subscribe(posts=>{
     this.clientes= posts;
 
-    });
+    });*/
   }
 
 
@@ -52,6 +51,8 @@ export class NavbarComponent implements OnInit {
     this.mensaje4="";
     this.model2.nit_Empresa=this.nit1+""+this.nit2+""+this.nit3+"-"+this.nit4;
     console.log("nit de la empresa:"+this.model2.nit_Empresa);
+    
+    this.seEncuentraCedulaSolicitud=false;
     for (var i = 0; i < this.clientes.length; i++) {
 
       if(this.model2.Cedula == this.clientes[i].Cedula){
@@ -86,13 +87,12 @@ export class NavbarComponent implements OnInit {
       this.mensaje3="No se encuetra registrada la cedula en el sistema!!";
     }
 
-
-
-
   }
 
-  insertarCliente(form: NgForm){
-      this.mensaje4="";
+  insertarCliente(){
+    this.mensaje4="";
+    this.seEncuetraCedula=false;
+    this.seEncuetraUsuario=false;
 
     for (var i = 0; i < this.clientes.length; i++) {
 
@@ -107,31 +107,31 @@ export class NavbarComponent implements OnInit {
 
     }  
 
-
-    if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
-      console.log("la cedula y el usuario no son repetidos!!");
-      this.postService.insertCliente(this.model).subscribe(posts=>{
-        console.log(posts);
-        this.check= posts;
-        this.mensaje4="Cliente ingresado exitosamente!!"
-      });
-    }
-    
     if(this.seEncuetraCedula){
-      alert("Cedula repetida");
-      console.log("la cedula esta repetida!!"+this.seEncuetraCedula);
+      //alert("Cedula repetida");
+      //console.log("la cedula esta repetida!!"+this.seEncuetraCedula);
       this.model.Cedula='';
       this.mensaje1 = "Ya existe esta Cedula";
-      this.seEncuetraCedula=false;
     }
 
     if(this.seEncuetraUsuario){
-      alert("usuario repetido");
-      console.log("el usuario esta repetido!!"+this.seEncuetraUsuario);
+      //alert("usuario repetido");
+      //console.log("el usuario esta repetido!!"+this.seEncuetraUsuario);
       this.model.Usuario='';
       this.mensaje2 = "Ya existe este Usuario";
-      this.seEncuetraUsuario=false;
     }
+
+    if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
+      //console.log("la cedula y el usuario no son repetidos!!");
+      this.postService.insertCliente(this.model).subscribe(posts=>{
+        //console.log(posts);
+        this.check= posts;
+        
+      });
+      this.mensaje4="Usuario ingresado exitosamente!!";
+    }
+    
+    
 
   }
 
@@ -139,7 +139,16 @@ export class NavbarComponent implements OnInit {
     form.resetForm(); // or form.reset();
   }
 
+  registrarse(){
+    this.mensaje1 = "Este campo es requerido";
+    this.mensaje2 = "Este campo es requerido";
+    this.mensaje3 = "Este campo es requerido";
 
+    this.postService.getPost().subscribe(posts=>{
+      this.clientes= posts;
+  
+      });
+  }
  
 
   ngOnInit() {
@@ -191,8 +200,6 @@ export class NavbarComponent implements OnInit {
 
   }
 
-
-
   vte:boolean;
   fecha3:Date;
 antiguedadAñoYmedio(): boolean {
@@ -209,9 +216,9 @@ if(new Date().getMonth()<6){
   let fecha2:Date=new Date(((new Date().getFullYear() - 2) + "/" + (12-(6-(new Date().getMonth()+1)) + "/" + new Date().getDate())));
   console.log(6-(new Date().getMonth()+1));
   console.log(fecha2);
-  this.vte = (new Date(((new Date().getFullYear() - 2) + "/" + (12-(6-(new Date().getMonth()+1)) + "/" + new Date().getDate())))) > fecha)
+  this.vte = (new Date(((new Date().getFullYear() - 2) + "/" + (12-(6-(new Date().getMonth()+1)) + "/" + new Date().getDate()))) > fecha);
 }else{
-  this.vte = (new Date(((new Date().getFullYear() - 1) + "/" + (new Date().getMonth()-6) + "/" + new Date().getDate())) > fecha)
+  this.vte = (new Date(((new Date().getFullYear() - 1) + "/" + (new Date().getMonth()-6) + "/" + new Date().getDate())) > fecha);
 }
 
 

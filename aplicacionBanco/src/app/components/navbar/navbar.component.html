@@ -22,7 +22,7 @@
         <form class="form-inline my-2 my-lg-0">
           <div class="container">
   
-            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm)">Registrarse </button>
+            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm); registrarse()">Registrarse </button>
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
           </div>
         </form>
@@ -110,7 +110,7 @@
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
               <input type="text" class="form-control" #userUser="ngModel" ngModel id="cliente" placeholder="Ingrese Usuario" name="client"
-                required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
+                required pattern="[0-9a-zñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
             </div>
   
@@ -122,7 +122,7 @@
   
               <div *ngIf="userUser.errors?.pattern" class="alert alert-danger">
   
-                Usuario no valido. Ingrese solo letra y números
+                Usuario no valido. Ingrese solo letras minusculas y números.
               </div>
   
               <div *ngIf="!userUser.errors?.pattern && !userUser.errors?.required && userUser.errors?.minlength" class="alert alert-warning">
@@ -173,7 +173,7 @@
             </div>
             <div class="modal-footer">
               <button type="button"  name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" id="crearCliente" 
-              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente(frm) " data-dismiss="modal">Crear usuario</button>
+              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente() " data-dismiss="modal">Crear usuario</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frm)">Cerrar</button>
             </div> 
           </form>
@@ -189,9 +189,6 @@
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
         <div class="modal-body">
           <p>{{mensaje4}}</p>
         </div>
@@ -317,12 +314,20 @@
               <label for="recipient-name" class="form-control-label">Empresa:
               </label>
               <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="nombre2" placeholder="Ingrese nombre de la empresa"
-                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" >
+                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa"  pattern="[A-Za-zñÑ]*">
               <p id="NEmp"></p>
             </div>
   
             <div *ngIf="EmpCli?.touched">
               <div *ngIf="EmpCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>
+
+            <div *ngIf="EmpCli?.dirty">
+  
+              <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger">
+  
+                Nombre no valido. Ingrese solo letras.
+              </div>
             </div>
 
             <!-- inicio  campo del nit de la empresa -->
@@ -398,7 +403,9 @@
             </div>
   
             <div class="modal-footer">
-              <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud()" >Realizar Solicitud</button>
+              <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
+              id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud()" >Realizar Solicitud</button>
+              
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frms)">Cerrar</button>
             </div>
           </form>
