@@ -28,6 +28,8 @@ export class NavbarComponent implements OnInit {
   seEncuetraCedula:boolean = false;
   seEncuetraUsuario:boolean = false;
   seEncuentraCedulaSolicitud:boolean=false;
+
+
   constructor( private postService:PostService){
 
 
@@ -110,19 +112,58 @@ export class NavbarComponent implements OnInit {
     form.resetForm(); // or form.reset();
   }
 
+
   fechactual:string;
-  fechaInput:string;
+  mayor18:boolean;
+  fechactual1:string;
 
   ngOnInit() {
-    this.fechactual = new Date().toString();
-    // this.fechactual = new Date().toString();
+
+    this.fechactual= new Date().toString();
+    this.fechactual = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()).toString();
+    if ((new Date().getMonth() + 1) < 10 && (new Date().getDate()) < 10) {
+      this.fechactual = ((new Date().getFullYear()) + "-" + "0" + (new Date().getMonth() + 1) + "-" + "0" + new Date().getDate()).toString();
+
+    } else if ((new Date().getMonth() + 1) < 10) {
+      this.fechactual = ((new Date().getFullYear()) + "-" + "0" + (new Date().getMonth() + 1) + "-" + new Date().getDate()).toString();
+    } else if (new Date().getDate() < 10) {
+      this.fechactual = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + "0" + new Date().getDate()).toString();
+    }
+    else {
+      this.fechactual = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()).toString();
+    }
+
+  
+
+    this.fechactual1 = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + (new Date().getDate()-1)).toString();
+    if ((new Date().getMonth() + 1) < 10 && (new Date().getDate()) < 10) {
+      this.fechactual1 = ((new Date().getFullYear()) + "-" + "0" + (new Date().getMonth() + 1) + "-" + "0" +  (new Date().getDate()-1)).toString();
+
+    } else if ((new Date().getMonth() + 1) < 10) {
+      this.fechactual1 = ((new Date().getFullYear()) + "-" + "0" + (new Date().getMonth() + 1) + "-" +  (new Date().getDate()-1)).toString();
+    } else if (new Date().getDate() < 10) {
+      this.fechactual1 = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" + "0" +  (new Date().getDate()-1)).toString();
+    }
+    else {
+      this.fechactual1 = ((new Date().getFullYear()) + "-" + (new Date().getMonth() + 1) + "-" +  (new Date().getDate()-1)).toString();
+    }
+
+
   }
 
+
   onChangeFecha():void{
-      console.log(this.fechaInput)
-      let fechaNacimiento:Date =new Date(this.fechaInput);
+      console.log(this.model.fecha_Nacimiento)
+      let fechaNacimiento:Date =new Date(this.model.fecha_Nacimiento);
       console.log(new Date(((new Date().getFullYear()-18) + "/" + (new Date().getMonth() +1) + "/" + new Date().getDay()))<fechaNacimiento)
-      
+      this.mayor18 = (new Date(((new Date().getFullYear() - 18) + "/" + (new Date().getMonth() + 1) + "/" + new Date().getDate())) > fechaNacimiento)
+
+    if (!this.mayor18) {
+      // alert("La fecha ingresada no corresponde a una persona mayor de edad");
+      this.model.fecha_Nacimiento = null;
+    }
+
+
   }    
    
 }

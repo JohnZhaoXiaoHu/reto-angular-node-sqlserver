@@ -162,6 +162,11 @@
                 required>
               <p id="fecha"></p>
             </div>
+            <div *ngIf="calUser?.dirty">
+              <div *ngIf="mayor18 == false" class="alert alert-danger">
+                  La fecha ingresada no corresponde a una persona mayor de edad.
+              </div>
+            </div>
   
             <div *ngIf="calUser?.touched">
               <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
@@ -349,7 +354,7 @@
               <label for="recipient-name" class="form-control-label">Salario actual:
               </label>
               <input #moneyCli="ngModel" ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario" name="salario"
-                required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*" [(ngModel)]="model2.Salario">
+                required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*" [(ngModel)]="model2.Salario"  maxlength="8" >
               <p id="money"></p>
             </div>
   
@@ -367,7 +372,7 @@
   
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
-              <input type="date" name="fecha" max="2018-02-27" step="2" #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
+              <input type="date" name="fecha" max="{{fechactual1}}"  #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
               <p id="fecha"></p>
             </div>
   
