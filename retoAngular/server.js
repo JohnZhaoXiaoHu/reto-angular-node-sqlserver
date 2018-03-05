@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "192.168.3.106",
+    server: "CPX-HQKYIJMGBEL\\SQLEXPRESS",
     database: "angular"
    };
 
@@ -52,14 +52,15 @@ var  executeQuery = function(respond,query){
                                  respond.send(err);
                                 }
                                 else {
-                                  console.log(res);
+                                  //onsole.log(res);
                                   respond.json(res);
                                  }
                           });
-
+                    
                   }
       });
 }
+
 
 
 
@@ -84,13 +85,13 @@ app.get('/cliente', function (req, res) {
 });
 
 app.get('/solicitud', function (req, res) {
-  console.log("realizando peticion get");
+  console.log("realizando peticion get solicitudes!!");
         var query = "select * from [Solicitud]";
                  executeQuery (res, query);
 });
 
 app.post("/solicitud/create", function(req , res){
-               console.log("peticion post!!");
+               console.log("peticion post solicitudes!!");
 
                console.log(req.body);
 
@@ -100,7 +101,7 @@ app.post("/solicitud/create", function(req , res){
 
 
 app.post("/credito/create", function(req , res){
-  console.log("peticion post!!");
+  console.log("peticion post creditos!!");
 
   console.log(req.body);
 

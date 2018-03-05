@@ -58,7 +58,7 @@ export interface Solicitud {
 }
 
 export interface Credito {
-  nit_Empresa: string;
+  id_Solicitud: string;
   Cedula: string;
   Cantidad: string;
 }

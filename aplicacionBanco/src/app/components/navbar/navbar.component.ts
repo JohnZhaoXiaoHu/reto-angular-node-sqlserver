@@ -36,13 +36,13 @@ export class NavbarComponent implements OnInit {
   fechactual:string;
   mayor18:boolean;
   fechactual1:string;
-
+  credito:Credito;
   constructor( private postService:PostService){
-    /*
+    
     this.postService.getPost().subscribe(posts=>{
     this.clientes= posts;
 
-    });*/
+    });
   }
 
 
@@ -62,7 +62,7 @@ export class NavbarComponent implements OnInit {
 
     if(this.seEncuentraCedulaSolicitud){
       this.postService.insertSolicitud(this.model2).subscribe(posts=>{
-        console.log(posts);
+        console.log("respuesta del back:"+posts);
         this.check2= posts;
 
         if(this.antiguedadAñoYmedio() && this.model2.Salario >=800000){
@@ -79,7 +79,6 @@ export class NavbarComponent implements OnInit {
           this.mensaje4="Credito no aceptado";
         }
 
-       
       });
       this.seEncuentraCedulaSolicitud=false;
     }else{
@@ -95,11 +94,11 @@ export class NavbarComponent implements OnInit {
     this.seEncuetraUsuario=false;
 
     for (var i = 0; i < this.clientes.length; i++) {
-
+      console.log(this.model.Cedula+"-"+this.clientes[i].Cedula);
       if(this.model.Cedula == this.clientes[i].Cedula){
         this.seEncuetraCedula=true;
       }
-
+      console.log(this.model.Usuario+"-"+this.clientes[i].Usuario);
       if(this.model.Usuario == this.clientes[i].Usuario){
         this.seEncuetraUsuario=true;
       }
@@ -126,9 +125,9 @@ export class NavbarComponent implements OnInit {
       this.postService.insertCliente(this.model).subscribe(posts=>{
         //console.log(posts);
         this.check= posts;
-        
+        this.mensaje4="Usuario ingresado exitosamente!!";
       });
-      this.mensaje4="Usuario ingresado exitosamente!!";
+    
     }
     
     
@@ -143,10 +142,10 @@ export class NavbarComponent implements OnInit {
     this.mensaje1 = "Este campo es requerido";
     this.mensaje2 = "Este campo es requerido";
     this.mensaje3 = "Este campo es requerido";
-
+      console.log("pidiendo los clientes");
     this.postService.getPost().subscribe(posts=>{
       this.clientes= posts;
-  
+        console.log(this.clientes);
       });
   }
  

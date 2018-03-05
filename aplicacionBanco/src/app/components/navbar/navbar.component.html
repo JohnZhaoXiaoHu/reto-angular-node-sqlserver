@@ -22,7 +22,7 @@
         <form class="form-inline my-2 my-lg-0">
           <div class="container">
   
-            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm); registrarse()">Registrarse </button>
+            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm); registrarse()" id="register">Registrarse </button>
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
           </div>
         </form>
@@ -109,7 +109,7 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
-              <input type="text" class="form-control" #userUser="ngModel" ngModel id="cliente" placeholder="Ingrese Usuario" name="client"
+              <input type="text" class="form-control" #userUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="client"
                 required pattern="[0-9a-zñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
             </div>
@@ -193,7 +193,7 @@
           <p>{{mensaje4}}</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="ok" >Cerrar</button>
         </div>
       </div>
       
@@ -216,7 +216,7 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
-              <input type="text" class="form-control" #userlUser="ngModel" ngModel id="usuario" placeholder="Ingrese Usuario" name="user"
+              <input type="text" class="form-control" #userlUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="user"
                 required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5">
               <p id="Usuario"></p>
             </div>
@@ -313,8 +313,8 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Empresa:
               </label>
-              <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="nombre2" placeholder="Ingrese nombre de la empresa"
-                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa"  pattern="[A-Za-zñÑ]*">
+              <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese nombre de la empresa"
+                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa"  pattern="[A-Za-zñÑ]*" >
               <p id="NEmp"></p>
             </div>
   
@@ -394,7 +394,7 @@
   
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
-              <input type="date" name="fecha" max="{{fechactual1}}"  #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
+              <input type="date" name="fecha" max="{{fechactual1}}" id="calendari"  #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
               <p id="fecha"></p>
             </div>
   
@@ -404,7 +404,7 @@
   
             <div class="modal-footer">
               <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-              id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud()" >Realizar Solicitud</button>
+              id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud();  registrarse()" >Realizar Solicitud</button>
               
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frms)">Cerrar</button>
             </div>
