@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "localhost",
+    server: "192.168.1.57",
     database: "angular"
    };
 
@@ -40,7 +40,7 @@ var  executeQuery = function(respond,query){
      sql.connect(dbConfig, function (err) {
          if (err) {
                      console.log("Error while connecting database :- " + err);
-                     res.send(err);
+                     respond.send(err);
                   }
                   else{
                     // create Request object
@@ -53,7 +53,7 @@ var  executeQuery = function(respond,query){
                                 }
                                 else {
                                   console.log(res);
-                                  respond.send(res);
+                                  respond.json(res);
                                  }
                           });
 

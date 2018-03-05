@@ -9,6 +9,9 @@ import { NgForm, Form, FormGroup, FormsModule} from '@angular/forms';
   providers: [PostService]
 
 })
+
+
+
 export class NavbarComponent implements OnInit {
   
   clientes: Cliente[];
@@ -16,6 +19,8 @@ export class NavbarComponent implements OnInit {
   mensaje2 = "Este campo es requerido";
   check: Cliente;
   model:any = {};
+  seEncuetraCedula:boolean = false;
+  seEncuetraUsuario:boolean = false;
   
   constructor( private postService:PostService){
 
@@ -27,39 +32,55 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarCliente(form: NgForm){
-    var seEncuetra=false;
-    var i;
-    var length = this.clientes.length;
-    for (i = 0; i < length; i++) {
+
+
+    for (var i = 0; i < this.clientes.length; i++) {
+
       if(this.model.Cedula == this.clientes[i].Cedula){
-        this.mensaje1 = "Ya existe la cedula";
-        //alert("Ya existe el usuario");
-        seEncuetra=true;
-        this.model.Cedula='';
+        this.seEncuetraCedula=true;
       }
+
       if(this.model.Usuario == this.clientes[i].Usuario){
-        this.mensaje2 = "Ya existe el usuario";
-        //alert("Ya existe el usuario");
-        seEncuetra=true;
-        this.model.Usuario='';
+        this.seEncuetraUsuario=true;
       }
+      
+
     }  
 
 
-    if(!seEncuetra){
-      this.mensaje1 = "Este campo es requerido";
-      this.mensaje2 = "Este campo es requerido";
+    if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
+      console.log("la cedula y el usuario no son repetidos!!");
       this.postService.insertCliente(this.model).subscribe(posts=>{
+        console.log(posts);
         this.check= posts;
       });
     }
+    
+    if(this.seEncuetraCedula){
+      alert("Cedula repetida");
+      console.log("la cedula esta repetida!!"+this.seEncuetraCedula);
+      this.model.Cedula='';
+      this.mensaje1 = "Ya existe esta Cedula";
+      this.seEncuetraCedula=false;
+    }
+
+    if(this.seEncuetraUsuario){
+      alert("usuario repetido");
+      console.log("el usuario esta repetido!!"+this.seEncuetraUsuario);
+      this.model.Usuario='';
+      this.mensaje2 = "Ya existe este Usuario";
+      this.seEncuetraUsuario=false;
+    }
+
   }
+
   borrarForm(form: NgForm){
     form.resetForm(); // or form.reset();
   }
 
   fechactual:string;
   fechaInput:string;
+
   ngOnInit() {
     this.fechactual = new Date().toString();
     // this.fechactual = new Date().toString();
