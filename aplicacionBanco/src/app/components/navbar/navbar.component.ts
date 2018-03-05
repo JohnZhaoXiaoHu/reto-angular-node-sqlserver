@@ -32,6 +32,9 @@ export class NavbarComponent implements OnInit {
   nit2:string;
   nit3:string;
   nit4:string;
+  fechactual:string;
+  mayor18:boolean;
+  fechactual1:string;
 
   constructor( private postService:PostService){
 
@@ -120,9 +123,7 @@ export class NavbarComponent implements OnInit {
   }
 
 
-  fechactual:string;
-  mayor18:boolean;
-  fechactual1:string;
+ 
 
   ngOnInit() {
 
