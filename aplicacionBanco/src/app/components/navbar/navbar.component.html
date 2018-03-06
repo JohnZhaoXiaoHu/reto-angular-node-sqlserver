@@ -13,7 +13,7 @@
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">Servicios Cliente</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms)">Solicitar Crédito</a>
+              <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true">Solicitar Crédito</a>
               <a class="dropdown-item" href="#">Créditos aprobados</a>
   
             </div>
@@ -23,7 +23,7 @@
           <div class="container">
   
             <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" 
-            (click)="resetForm(frm)" id="register">Registrarse </button>
+            (click)="resetForm(frm); seEncuetraCedula=false; seEncuetraUsuario=false" id="register">Registrarse </button>
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
           </div>
         </form>
@@ -46,7 +46,7 @@
               <label for="recipient-name" class="form-control-label">Nombre:
               </label>
               <input type="text" name="name" class="form-control" #nameUser="ngModel" ngModel required pattern="[a-zA-Z]*" id="nombre"
-                placeholder="Ingrese Nombre" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" [(ngModel)]="model.Nombre">
+                placeholder="Ingrese Nombre" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" maxlength="40" [(ngModel)]="model.Nombre"> 
               <p id="Nombre"></p>
             </div>
   
@@ -66,7 +66,7 @@
               <label for="recipient-name" class="form-control-label">Apellido:
               </label>
               <input type="text" name="lastname" class="form-control" #lastnameUser="ngModel" ngModel required pattern="[a-zA-Z]*" id="apellido"
-                placeholder="Ingrese Apellido" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" [(ngModel)]="model.Apellido">
+                placeholder="Ingrese Apellido" pattern="[A-Za-zñÑ]*" title="Solo debe ingresar letras" maxlength="40" [(ngModel)]="model.Apellido">
               <p id="Apellido"></p>
             </div>
   
@@ -85,25 +85,26 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Cédula
               </label>
-              <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" (change)="verificarCedulaCliente()" minlength="6" [(ngModel)]="model.Cedula">
+              <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cédula"
+                pattern="[0-9]*" title="Solo debe ingresar números" (click)="seEncuetraCedula=false" (blur)="verificarCedulaCliente()" maxlength="12" minlength="6" [(ngModel)]="model.Cedula">
 
               <p id="cedula"></p>
             </div>
-  
-            <div *ngIf="cedUser?.touched">
-              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensajeCedulaCliente}}</div>
+            
+            <div *ngIf="seEncuetraCedula"  class="alert alert-danger">
+              Esta cédula ya se encuentra registrada en el sistema
             </div>
+
+            <div *ngIf="cedUser?.touched">
+              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            </div>        
   
             <div *ngIf="cedUser?.dirty">
-  
               <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
-  
                 Cédula no válida. Ingrese solo números
               </div>
   
               <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
-  
                 Ingrese su cédula completa
               </div>
             </div>
@@ -112,23 +113,24 @@
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
               <input type="text" class="form-control" #userUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="client"
-                required pattern="[0-9a-zñÑ]*" (change)="verificarUsuarioCliente()" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
+                required pattern="[0-9a-zñÑ]*" (click)="seEncuetraUsuario=false" (blur)="verificarUsuarioCliente()" title="Solo debe ingresar letras y números" maxlength="40" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
+            </div>
+
+            <div *ngIf="seEncuetraUsuario"  class="alert alert-danger">
+              Este usuario ya se encuentra registrado en el sistema
             </div>
   
             <div *ngIf="userUser?.touched">
-              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> {{mensajeUsuarioCliente}} </div>
+              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> Este campo es requerido </div>
             </div>
   
             <div *ngIf="userUser?.dirty">
-  
               <div *ngIf="userUser.errors?.pattern" class="alert alert-danger">
-  
                 Usuario no válido. Ingrese solo letras minúsculas y números.
               </div>
   
               <div *ngIf="!userUser.errors?.pattern && !userUser.errors?.required && userUser.errors?.minlength" class="alert alert-warning">
-  
                 El usuario debe contener mínimo 5 letras o números
               </div>
             </div>
@@ -174,8 +176,8 @@
               <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
             </div>
             <div class="modal-footer">
-              <button type="button"  name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" id="crearCliente" 
-              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente(); registrarse()" data-dismiss="modal">Crear usuario</button>
+              <button type="button"  name="button" [disabled]="frm.invalid || seEncuetraCedula" class="btn btn-info btn-lg" id="crearCliente" 
+              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente()" data-dismiss="modal">Crear usuario</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frm)">Cerrar</button>
             </div> 
           </form>
@@ -288,14 +290,16 @@
           <form #frms="ngForm" (ngSubmit)="Login(frms)">
   
             <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Cedula
+              <label for="recipient-name" class="form-control-label">Cédula
               </label>
-              <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Minimo 10 digitos del 0 al 9"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedulaSolicitud(frms)" > 
+              <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cédula"
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedulaSolicitud()"
+                 (click)="seEncuentraCedulaSolicitud=true" maxlength="12"> 
               <p id="cedula2"></p>
             </div>
-            <div *ngIf="mostrarMensaje"  class="alert alert-danger">
-              {{mensajeCedulaSolicitud}}
+
+            <div *ngIf="!seEncuentraCedulaSolicitud"  class="alert alert-danger">
+              Esta cédula no se encuentra registrada en el sistema
             </div>
   
             <div *ngIf="ced2User?.touched">
@@ -303,14 +307,11 @@
             </div>
   
             <div *ngIf="ced2User?.dirty">
-  
               <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger">
-  
                 Cédula no válida. Ingrese solo números
               </div>
   
               <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning">
-  
                 Ingrese su cédula completa
               </div>
             </div>
@@ -319,7 +320,7 @@
               <label for="recipient-name" class="form-control-label">Empresa:
               </label>
               <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese nombre de la empresa"
-                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa"  pattern="[A-Za-zñÑ]*" >
+                name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa"  pattern="[A-Za-zñÑ]*" maxlength="40">
               <p id="NEmp"></p>
             </div>
   
