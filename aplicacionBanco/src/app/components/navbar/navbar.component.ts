@@ -65,7 +65,6 @@ export class NavbarComponent implements OnInit {
         }
 
       });
-      this.seEncuentraCedulaSolicitud = false;
     }
   }
 
@@ -121,7 +120,7 @@ export class NavbarComponent implements OnInit {
   }
 
   verificarCedulaSolicitud() {
-    this.seEncuentraCedulaSolicitud = false;
+    
     //console.log("cambio el campo cedula:" + this.model2.cedula);
     if (this.model2.Cedula.length >= 6) {
 
@@ -132,6 +131,9 @@ export class NavbarComponent implements OnInit {
             console.log("Si existe la cedula");
             this.seEncuentraCedulaSolicitud = true;
           }
+        }
+        else{
+          this.seEncuentraCedulaSolicitud = false;
         }
 
       });

@@ -413,7 +413,7 @@
   
             <div class="modal-footer">
               <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-              id="realizarSolicitud" [disabled]="frms.invalid || mostrarMensaje" (click)="insertarSolicitud()" >Realizar Solicitud</button>
+              id="realizarSolicitud" [disabled]="frms.invalid || !seEncuentraCedulaSolicitud" (click)="insertarSolicitud()" >Realizar Solicitud</button>
               
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms); mostrarMensaje=false">Cerrar</button>
             </div>
