@@ -291,7 +291,7 @@
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
               <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Minimo 10 digitos del 0 al 9"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedulaSolicitud(frms)" > 
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedula()" > 
               <p id="cedula2"></p>
             </div>
             <div *ngIf="mostrarMensaje"  class="alert alert-danger">

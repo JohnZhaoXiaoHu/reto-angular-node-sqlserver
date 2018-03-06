@@ -158,7 +158,6 @@ export class NavbarComponent implements OnInit {
         }
 
         if(!this.seEncuentraCedulaSolicitud){
-          this.model2.Cedula="";
           this.mostrarMensaje=true;
           this.mensajeCedulaSolicitud="Esta cédula no se encuentra registrada en el sistema";
         }
