@@ -39,13 +39,10 @@ export class NavbarComponent implements OnInit {
   mayor18:boolean;
   fechactual1:string;
   credito:Credito;
-  constructor( private postService:PostService){
-    
-    this.postService.getPost().subscribe(posts=>{
-    this.clientes= posts;
+  vte:boolean;
+  fecha3:Date;
 
-    });
-  }
+  constructor( private postService:PostService){}
 
 
 
@@ -56,18 +53,20 @@ export class NavbarComponent implements OnInit {
     
 
     if(this.seEncuentraCedulaSolicitud){
+
       this.postService.insertSolicitud(this.model2).subscribe(posts=>{
+        console.log("fecha:"+Date.now());
         console.log("respuesta del back:"+posts);
         this.check2= posts;
 
         if(this.antiguedadAñoYmedio() && this.model2.Salario >=800000){
           this.mensaje4="Credito aceptado";
           if(this.model2.Salario>=800000 && this.model2.Salario <1000000){
-              this.mensaje4+="\n por el monto de 5000000";
+              this.mensaje4+="\n por el monto de $ 5.000.000";
           }else if(this.model2.Salario>=1000000 && this.model2.Salario <4000000){
-            this.mensaje4+="\n por el monto de 20000000";
+            this.mensaje4+="\n por el monto de $ 20.000.000";
           }else if(this.model2.Salario >=4000000){
-            this.mensaje4+="\n por el monto de 50000000";
+            this.mensaje4+="\n por el monto de $ 50.000.000";
           }
           console.log("solicitud creada exitosamente!!");
         }else{
@@ -81,83 +80,84 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarCliente(){
-    this.mensaje4="";
-    this.seEncuetraCedula=false;
-    this.seEncuetraUsuario=false;
-
-    for (var i = 0; i < this.clientes.length; i++) {
-      console.log(this.model.Cedula+"-"+this.clientes[i].Cedula);
-      if(this.model.Cedula == this.clientes[i].Cedula){
-        this.seEncuetraCedula=true;
-      }
-      console.log(this.model.Usuario+"-"+this.clientes[i].Usuario);
-      if(this.model.Usuario == this.clientes[i].Usuario){
-        this.seEncuetraUsuario=true;
-      }
-      
-
-    }  
-
-    if(this.seEncuetraCedula){
-      //alert("Cedula repetida");
-      //console.log("la cedula esta repetida!!"+this.seEncuetraCedula);
-      this.model.Cedula='';
-      this.mensaje1 = "Ya existe esta Cedula";
-    }
-
-    if(this.seEncuetraUsuario){
-      //alert("usuario repetido");
-      //console.log("el usuario esta repetido!!"+this.seEncuetraUsuario);
-      this.model.Usuario='';
-      this.mensaje2 = "Ya existe este Usuario";
-    }
-
     if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
-      //console.log("la cedula y el usuario no son repetidos!!");
       this.postService.insertCliente(this.model).subscribe(posts=>{
-        //console.log(posts);
+        console.log("respuesta del server:"+posts);
         this.check= posts;
         this.mensaje4="Usuario ingresado exitosamente!!";
       });
-    
     }
-    
-    
-
   }
 
   borrarForm(form: NgForm){
     form.resetForm(); // or form.reset();
   }
 
-  registrarse(){
-    this.mensaje1 = "Este campo es requerido";
-    this.mensaje2 = "Este campo es requerido";
-    this.mensaje3 = "Este campo es requerido";
-      console.log("pidiendo los clientes");
-    this.postService.getPost().subscribe(posts=>{
-      this.clientes= posts;
-        console.log(this.clientes);
+
+
+  verificarUsuarioCliente(){
+    this.seEncuetraUsuario=false;
+
+      this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data=>{
+          console.log(data);
+          if(data[0]){
+            if(this.model.Usuario==data[0].Usuario){
+              console.log(this.model.Usuario+"="+data[0].Usuario);
+                this.seEncuetraUsuario=true;
+                console.log(this.seEncuetraUsuario);
+            }
+            if(this.seEncuetraUsuario){
+              this.model.Usuario='';
+              this.mensaje2 = "Este usuario ya se encuentra registrado en el sistema";
+            }
+
+          }
+
       });
   }
+
+  verificarCedulaCliente(){
+    this.seEncuetraCedula=false;
+    console.log("cambio el campo cedula:"+this.model.cedula);
+    this.postService.buscarClientePorCedula(this.model.Cedula).subscribe(data=>{
+        console.log(data);
+         if(data[0]){
+          if(this.model.Cedula==data[0].Cedula){
+            console.log("Si existe la cedula");
+            this.seEncuetraCedula=true;
+          }
+        }
+
+        if(this.seEncuetraCedula){
+          this.model.Cedula="";
+          this.mensaje1="Esta cédula ya se encuentra registrada en el sistema";
+        }
+    });
+  }
+
+
+
  
   verificarCedula(){
     this.seEncuentraCedulaSolicitud=false;
     this.mensajeCedulaSolicitud="";
     console.log("cambio el campo cedula:"+this.model2.cedula);
+    this.postService.buscarClientePorCedula(this.model2.Cedula).subscribe(data=>{
+        console.log(data);
+         if(data[0]){
+          if(this.model2.Cedula==data[0].Cedula){
+            console.log("Si existe la cedula");
+            this.seEncuentraCedulaSolicitud=true;
+            this.mostrarMensaje=false;
+          }
+        }
 
-    for (var i = 0; i < this.clientes.length; i++) {
-
-      if(this.model2.Cedula == this.clientes[i].Cedula){
-        this.seEncuentraCedulaSolicitud=true;
-        this.mostrarMensaje=false;
-      }
-    }
-      if(!this.seEncuentraCedulaSolicitud){
+        if(!this.seEncuentraCedulaSolicitud){
+          this.model2.Cedula="";
           this.mostrarMensaje=true;
-          this.mensajeCedulaSolicitud="No se encuetra registrada esta cedula en el sistema";
-      }
-
+          this.mensajeCedulaSolicitud="Esta cédula no se encuentra registrada en el sistema";
+        }
+    });
   }
 
   ngOnInit() {
@@ -209,8 +209,7 @@ export class NavbarComponent implements OnInit {
 
   }
 
-  vte:boolean;
-  fecha3:Date;
+ 
 antiguedadAñoYmedio(): boolean {
  
 console.log(this.model2.fecha_Ingreso);

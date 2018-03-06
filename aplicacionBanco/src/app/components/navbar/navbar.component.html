@@ -85,7 +85,7 @@
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
               <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model.Cedula">
+                pattern="[0-9]*" title="Solo debe ingresar números" (change)="verificarCedulaCliente()" minlength="10" [(ngModel)]="model.Cedula">
               <p id="cedula"></p>
             </div>
   
@@ -110,7 +110,7 @@
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
               <input type="text" class="form-control" #userUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="client"
-                required pattern="[0-9a-zñÑ]*" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
+                required pattern="[0-9a-zñÑ]*" (change)="verificarUsuarioCliente()" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
             </div>
   

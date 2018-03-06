@@ -34,6 +34,14 @@ export class PostService {
     return this.http.post<Solicitud>('http://localhost:8080/solicitud/create', solicitud);
   }
 
+  buscarClientePorCedula(cedula:string){
+    return this.http.get('http://localhost:8080/cliente/cedula/'+cedula);
+  }
+
+  buscarClientePorUsuario(usuario:string){
+    return this.http.get('http://localhost:8080/cliente/usuario/'+usuario);
+  }
+
 
 
 }
