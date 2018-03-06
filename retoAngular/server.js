@@ -35,6 +35,22 @@ var dbConfig = {
     database: "angular"
    };
 
+
+var ejecutarSentencia = function (respond,query){
+  var connection1 = new sql.Connection(dbConfig, function(err) {
+    var request = new sql.Request(connection1); // or: var request = connection1.request();
+    return request.query(query, function(err, recordset) {
+        console.log(recordset);
+        return respond.json(recordset);
+    });
+});
+
+connection1.on('error', function(err) {
+	console.dir(err);
+});
+
+}
+
 //Function to connect to database and execute query
 var  executeQuery = function(respond,query){
      sql.connect(dbConfig, function (err) {
@@ -56,7 +72,7 @@ var  executeQuery = function(respond,query){
                                   respond.json(res);
                                  }
                           });
-                    
+
                   }
       });
 }
@@ -64,12 +80,16 @@ var  executeQuery = function(respond,query){
 
 
 
-
+app.get('/cliente/:cedula',function(req,res){
+      console.log("buscando cliente por cedula:"+req.params.cedula);
+      var consulta = "select * from [Cliente] where Cedula='"+req.params.cedula;
+      ejecutarSentencia(res,consulta);
+});
 
 app.get('/cliente', function (req, res) {
   console.log("realizando peticion get");
         var query = "select * from [Cliente]";
-                 executeQuery (res, query);
+                 ejecutarSentencia(res, query);
 });
 
 

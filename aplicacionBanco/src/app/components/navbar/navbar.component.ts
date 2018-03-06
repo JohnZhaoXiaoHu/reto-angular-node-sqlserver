@@ -22,6 +22,8 @@ export class NavbarComponent implements OnInit {
   mensaje2 = "Este campo es requerido";
   mensaje3="Este campo es requerido";
   mensaje4="";
+  mostrarMensaje:boolean=false;
+  mensajeCedulaSolicitud="";
   check: Cliente;
   model:any = {};
   model2:any= {};
@@ -52,13 +54,6 @@ export class NavbarComponent implements OnInit {
     this.model2.nit_Empresa=this.nit1+""+this.nit2+""+this.nit3+"-"+this.nit4;
     console.log("nit de la empresa:"+this.model2.nit_Empresa);
     
-    this.seEncuentraCedulaSolicitud=false;
-    for (var i = 0; i < this.clientes.length; i++) {
-
-      if(this.model2.Cedula == this.clientes[i].Cedula){
-        this.seEncuentraCedulaSolicitud=true;
-      }
-    }
 
     if(this.seEncuentraCedulaSolicitud){
       this.postService.insertSolicitud(this.model2).subscribe(posts=>{
@@ -81,9 +76,6 @@ export class NavbarComponent implements OnInit {
 
       });
       this.seEncuentraCedulaSolicitud=false;
-    }else{
-      this.model2.Cedula="";
-      this.mensaje3="No se encuetra registrada la cedula en el sistema!!";
     }
 
   }
@@ -149,6 +141,24 @@ export class NavbarComponent implements OnInit {
       });
   }
  
+  verificarCedula(){
+    this.seEncuentraCedulaSolicitud=false;
+    this.mensajeCedulaSolicitud="";
+    console.log("cambio el campo cedula:"+this.model2.cedula);
+
+    for (var i = 0; i < this.clientes.length; i++) {
+
+      if(this.model2.Cedula == this.clientes[i].Cedula){
+        this.seEncuentraCedulaSolicitud=true;
+        this.mostrarMensaje=false;
+      }
+    }
+      if(!this.seEncuentraCedulaSolicitud){
+          this.mostrarMensaje=true;
+          this.mensajeCedulaSolicitud="No se encuetra registrada esta cedula en el sistema";
+      }
+
+  }
 
   ngOnInit() {
 
