@@ -86,13 +86,16 @@
               <label for="recipient-name" class="form-control-label">Cédula
               </label>
               <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" (change)="verificarCedulaCliente()" minlength="6" [(ngModel)]="model.Cedula">
+                pattern="[0-9]*" title="Solo debe ingresar números" (blur)="verificarCedulaCliente()" minlength="6" [(ngModel)]="model.Cedula">
 
               <p id="cedula"></p>
             </div>
+            <div *ngIf="seEncuentraCedula"  class="alert alert-danger">
+              Esta cédula ya se encuentra registrada en el sistema
+            </div>
   
             <div *ngIf="cedUser?.touched">
-              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensajeCedulaCliente}}</div>
+              <div *ngIf="cedUser.errors?.required" class="alert alert-danger">Este campo es requerido</div>
             </div>
   
             <div *ngIf="cedUser?.dirty">
@@ -112,12 +115,17 @@
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
               <input type="text" class="form-control" #userUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="client"
-                required pattern="[0-9a-zñÑ]*" (change)="verificarUsuarioCliente()" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
+                required pattern="[0-9a-zñÑ]*" (blur)="verificarUsuarioCliente()" title="Solo debe ingresar letras y números" minlength="5" [(ngModel)]="model.Usuario">
               <p id="Cliente"></p>
             </div>
+
+            <div *ngIf="seEncuentraUsuario"  class="alert alert-danger">
+              Este usuario ya se encuentra registrado en el sistema
+            </div>
+  
   
             <div *ngIf="userUser?.touched">
-              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> {{mensajeUsuarioCliente}} </div>
+              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> Este campo es requerido </div>
             </div>
   
             <div *ngIf="userUser?.dirty">
@@ -175,7 +183,7 @@
             </div>
             <div class="modal-footer">
               <button type="button"  name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" id="crearCliente" 
-              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente(); registrarse()" data-dismiss="modal">Crear usuario</button>
+              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente()" data-dismiss="modal">Crear usuario</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frm)">Cerrar</button>
             </div> 
           </form>
@@ -291,11 +299,11 @@
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
               <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Minimo 10 digitos del 0 al 9"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedula()" > 
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedula()" > 
               <p id="cedula2"></p>
             </div>
             <div *ngIf="mostrarMensaje"  class="alert alert-danger">
-              {{mensajeCedulaSolicitud}}
+              Esta cédula no se encuentra registrada en el sistema
             </div>
   
             <div *ngIf="ced2User?.touched">
@@ -383,8 +391,8 @@
               <div class="form-group">
                   <label for="recipient-name" class="form-control-label">Salario actual:
                     </label>
-                <input #moneyCli="ngModel" ngModel type="text" class="form-control" id="money" placeholder="Ingrese un salario maximo de 99.999.999" name="salario"
-                  required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*"  [(ngModel)]="model2.Salario"  maxlength="8" >
+                <input #moneyCli="ngModel" currencyMask  ngModel type="text" class="form-control" id="money" placeholder="Ingrese un salario maximo de 99.999.999" name="salario"
+                  required title="Solo debe ingresar números enteros y positivos" pattern="[0-9]*"  [(ngModel)]="model2.Salario"  maxlength="15" >
                 <p id="money"></p>
               </div>
            

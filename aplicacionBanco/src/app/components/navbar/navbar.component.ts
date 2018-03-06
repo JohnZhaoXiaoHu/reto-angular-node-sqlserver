@@ -18,17 +18,13 @@ import { VALID } from '@angular/forms/src/model';
 
 export class NavbarComponent implements OnInit {
   clientes: Cliente[];
-  mensajeCedulaCliente = "Este campo es requerido";
-  mensajeUsuarioCliente = "Este campo es requerido";
   mensajeModal = "";
   mostrarMensaje: boolean = false;
-  mensajeCedulaSolicitud = "";
   check: Cliente;
-
   model: any = {};
   model2: any = {};
   check2: Solicitud;
-  seEncuetraCedula: boolean = false;
+  seEncuetraCedula: boolean =false;
   seEncuetraUsuario: boolean = false;
   seEncuentraCedulaSolicitud: boolean = false;
   nit1: string;
@@ -81,6 +77,7 @@ export class NavbarComponent implements OnInit {
 
 
   insertarCliente(){
+
     if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
       this.postService.insertCliente(this.model).subscribe(posts=>{
         console.log("respuesta del server:"+posts);
@@ -88,6 +85,8 @@ export class NavbarComponent implements OnInit {
         this.mensajeModal="Usuario ingresado exitosamente!!";
       });
     }
+
+
   }
 
 
@@ -102,7 +101,6 @@ export class NavbarComponent implements OnInit {
 
   verificarUsuarioCliente(){
     this.seEncuetraUsuario=false;
-
       this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data=>{
           console.log(data);
           if(data[0]){
@@ -111,13 +109,7 @@ export class NavbarComponent implements OnInit {
                 this.seEncuetraUsuario=true;
                 console.log(this.seEncuetraUsuario);
             }
-            if(this.seEncuetraUsuario){
-              this.model.Usuario='';
-              this.mensajeUsuarioCliente = "Este usuario ya se encuentra registrado en el sistema";
-            }
-
           }
-
       });
   }
 
@@ -132,12 +124,8 @@ export class NavbarComponent implements OnInit {
             this.seEncuetraCedula=true;
           }
         }
-
-        if(this.seEncuetraCedula){
-          this.model.Cedula="";
-          this.mensajeCedulaCliente="Esta cédula ya se encuentra registrada en el sistema";
-        }
     });
+
   }
 
 
@@ -145,7 +133,6 @@ export class NavbarComponent implements OnInit {
  
   verificarCedula(){
     this.seEncuentraCedulaSolicitud=false;
-    this.mensajeCedulaSolicitud="";
     console.log("cambio el campo cedula:"+this.model2.cedula);
     this.postService.buscarClientePorCedula(this.model2.Cedula).subscribe(data=>{
         console.log(data);
@@ -159,7 +146,6 @@ export class NavbarComponent implements OnInit {
 
         if(!this.seEncuentraCedulaSolicitud){
           this.mostrarMensaje=true;
-          this.mensajeCedulaSolicitud="Esta cédula no se encuentra registrada en el sistema";
         }
     });
 
