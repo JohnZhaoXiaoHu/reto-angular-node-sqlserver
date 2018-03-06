@@ -13,8 +13,8 @@
             <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">Servicios Cliente</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="borrarForm(frms)">Solicitar Credito</a>
-              <a class="dropdown-item" href="#">Creditos aprobados</a>
+              <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms)">Solicitar Crédito</a>
+              <a class="dropdown-item" href="#">Créditos aprobados</a>
   
             </div>
           </li>
@@ -22,7 +22,8 @@
         <form class="form-inline my-2 my-lg-0">
           <div class="container">
   
-            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="borrarForm(frm); registrarse()" id="register">Registrarse </button>
+            <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" 
+            (click)="resetForm(frm)" id="register">Registrarse </button>
             <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
           </div>
         </form>
@@ -57,7 +58,7 @@
   
               <div *ngIf="nameUser.errors?.pattern" class="alert alert-danger">
   
-                Nombre no valido. Ingrese solo letras
+                Nombre no válido. Ingrese solo letras
               </div>
             </div>
   
@@ -77,32 +78,33 @@
   
               <div *ngIf="lastnameUser.errors?.pattern" class="alert alert-danger">
   
-                Apellido no valido. Ingrese solo letras
+                Apellido no válido. Ingrese solo letras
               </div>
             </div>
   
             <div class="form-group">
-              <label for="recipient-name" class="form-control-label">Cedula
+              <label for="recipient-name" class="form-control-label">Cédula
               </label>
               <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cedula"
-                pattern="[0-9]*" title="Solo debe ingresar números" (change)="verificarCedulaCliente()" minlength="10" [(ngModel)]="model.Cedula">
+                pattern="[0-9]*" title="Solo debe ingresar números" (change)="verificarCedulaCliente()" minlength="6" [(ngModel)]="model.Cedula">
+
               <p id="cedula"></p>
             </div>
   
             <div *ngIf="cedUser?.touched">
-              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensaje1}}</div>
+              <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> {{mensajeCedulaCliente}}</div>
             </div>
   
             <div *ngIf="cedUser?.dirty">
   
               <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
   
-                Cedula no valida. Ingrese solo números
+                Cédula no válida. Ingrese solo números
               </div>
   
               <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
   
-                Ingrese su cedula completa
+                Ingrese su cédula completa
               </div>
             </div>
   
@@ -115,14 +117,14 @@
             </div>
   
             <div *ngIf="userUser?.touched">
-              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> {{mensaje2}} </div>
+              <div *ngIf="userUser.errors?.required" class="alert alert-danger"> {{mensajeUsuarioCliente}} </div>
             </div>
   
             <div *ngIf="userUser?.dirty">
   
               <div *ngIf="userUser.errors?.pattern" class="alert alert-danger">
   
-                Usuario no valido. Ingrese solo letras minusculas y números.
+                Usuario no válido. Ingrese solo letras minúsculas y números.
               </div>
   
               <div *ngIf="!userUser.errors?.pattern && !userUser.errors?.required && userUser.errors?.minlength" class="alert alert-warning">
@@ -173,8 +175,8 @@
             </div>
             <div class="modal-footer">
               <button type="button"  name="button" [disabled]="frm.invalid" class="btn btn-info btn-lg" id="crearCliente" 
-              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente() " data-dismiss="modal">Crear usuario</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frm)">Cerrar</button>
+              data-toggle="modal" data-target="#Modal"  (click)="insertarCliente(); registrarse()" data-dismiss="modal">Crear usuario</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frm)">Cerrar</button>
             </div> 
           </form>
         </div>
@@ -190,7 +192,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-body">
-          <p>{{mensaje4}}</p>
+          <p>{{mensajeModal}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" id="ok" >Cerrar</button>
@@ -216,7 +218,7 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Usuario:
               </label>
-              <input type="text" class="form-control" #userlUser="ngModel" ngModel id="crearUsuario" placeholder="Ingrese Usuario" name="user"
+              <input type="text" class="form-control" #userlUser="ngModel" ngModel id="crear2Usuario" placeholder="Ingrese Usuario" name="user"
                 required pattern="[0-9a-zA-ZñÑ]*" title="Solo debe ingresar letras y números" minlength="5">
               <p id="Usuario"></p>
             </div>
@@ -229,7 +231,7 @@
   
               <div *ngIf="userlUser.errors?.pattern" class="alert alert-danger">
   
-                Usuario no valido. Ingrese solo letra y números
+                Usuario no válido. Ingrese solo letra y números
               </div>
   
               <div *ngIf="!userlUser.errors?.pattern && !userlUser.errors?.required && userlUser.errors?.minlength" class="alert alert-warning">
@@ -254,7 +256,7 @@
   
               <div *ngIf="passlUser.errors?.pattern" class="alert alert-danger">
   
-                Contraseña no valida. Ingrese solo letra y números
+                Contraseña no válida. Ingrese solo letra y números
               </div>
   
               <div *ngIf="!passlUser.errors?.pattern && !passlUser.errors?.required && passlUser.errors?.minlength" class="alert alert-warning">
@@ -280,7 +282,7 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Solicitud de credito</h4>
+          <h4 class="modal-title">Solicitud de crédito</h4>
         </div>
         <div class="modal-body">
           <form #frms="ngForm" (ngSubmit)="Login(frms)">
@@ -289,7 +291,7 @@
               <label for="recipient-name" class="form-control-label">Cedula
               </label>
               <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Minimo 10 digitos del 0 al 9"
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="10" [(ngModel)]="model2.Cedula" (change)="verificarCedula()" > 
+                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedulaSolicitud(frms)" > 
               <p id="cedula2"></p>
             </div>
             <div *ngIf="mostrarMensaje"  class="alert alert-danger">
@@ -304,12 +306,12 @@
   
               <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger">
   
-                Cedula no valida. Ingrese solo números
+                Cédula no válida. Ingrese solo números
               </div>
   
               <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning">
   
-                Ingrese su cedula completa
+                Ingrese su cédula completa
               </div>
             </div>
   
@@ -329,7 +331,7 @@
   
               <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger">
   
-                Nombre no valido. Ingrese solo letras.
+                Nombre no válido. Ingrese solo letras
               </div>
             </div>
 
@@ -340,12 +342,12 @@
         
               <br>
               <input type="serialnumber" [(ngModel)]="nit1"  style="width:35px;height:30px" id="NIT0" name="nit_Empresa0" minlength="3" maxlength="3" pattern="[0-9]*"
-              title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT1.focus()" ngModel #NitCli0="ngModel" (change)="cambioNit1()" required> .
-              <input type="serialnumber" (change)="cambioNit2()" [(ngModel)]="nit2" style="width:35px;height:30px" id="NIT1" name="nit_Empresa1" minlength="3" maxlength="3" pattern="[0-9]*"
+              title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT1.focus()" ngModel #NitCli0="ngModel" required> .
+              <input type="serialnumber" [(ngModel)]="nit2" style="width:35px;height:30px" id="NIT1" name="nit_Empresa1" minlength="3" maxlength="3" pattern="[0-9]*"
               title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT2.focus()" ngModel #NitCli1="ngModel" required > .
-              <input type="serialnumber" (change)="cambioNit3()" [(ngModel)]="nit3" style="width:35px;height:30px" id="NIT2" name="nit_Empresa2" minlength="3" maxlength="3" pattern="[0-9]*"
+              <input type="serialnumber"  [(ngModel)]="nit3" style="width:35px;height:30px" id="NIT2" name="nit_Empresa2" minlength="3" maxlength="3" pattern="[0-9]*"
               title="Solo debe ingresar números" onkeyup="if (this.value.length == 3) NIT3.focus()" ngModel #NitCli2="ngModel" required> -
-              <input type="serialnumber" (change)="cambioNit4()" [(ngModel)]="nit4" style="width:15px;height:30px" id="NIT3" name="nit_Empresa3" minlength="1" maxlength="1" pattern="[0-9]*"
+              <input type="serialnumber"  [(ngModel)]="nit4" style="width:15px;height:30px" id="NIT3" name="nit_Empresa3" minlength="1" maxlength="1" pattern="[0-9]*"
               title="Solo debe ingresar números" ngModel #NitCli3="ngModel" required> 
               
               <p id="nit"></p>
@@ -362,7 +364,7 @@
   
               <div *ngIf="NitCli0.errors?.pattern || NitCli1.errors?.pattern || NitCli2.errors?.pattern || NitCli3.errors?.pattern" class="alert alert-danger">
   
-                Nit no valido. Ingrese solo números
+                Nit no válido. Ingrese solo números
               </div>
   
               <div *ngIf="!NitCli0.errors?.pattern && !NitCli0.errors?.required && NitCli0.errors?.minlength || !NitCli1.errors?.pattern && !NitCli1.errors?.required && NitCli1.errors?.minlength || !NitCli2.errors?.pattern && !NitCli2.errors?.required && NitCli2.errors?.minlength || !NitCli3.errors?.pattern && !NitCli3.errors?.required && NitCli3.errors?.minlength"
@@ -394,7 +396,7 @@
   
               <div *ngIf="moneyCli.errors?.pattern" class="alert alert-danger">
   
-                Salario no valido. Ingrese solo números enteros y positivos
+                Salario no válido. Ingrese solo números enteros y positivos
               </div>
             </div>
   
@@ -410,9 +412,9 @@
   
             <div class="modal-footer">
               <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-              id="realizarSolicitud" [disabled]="frms.invalid" (click)="insertarSolicitud();  registrarse()" >Realizar Solicitud</button>
+              id="realizarSolicitud" [disabled]="frms.invalid || mostrarMensaje" (click)="insertarSolicitud()" >Realizar Solicitud</button>
               
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="borrarForm(frms)">Cerrar</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms); mostrarMensaje=false">Cerrar</button>
             </div>
           </form>
         </div>
