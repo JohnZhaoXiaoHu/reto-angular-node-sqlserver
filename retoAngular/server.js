@@ -31,7 +31,7 @@ app.listen(8080, function () {
 var dbConfig = {
     user:  "sa",
     password: "Retoangular18",
-    server: "CPX-HQKYIJMGBEL\\SQLEXPRESS",
+    server: "192.168.3.139",
     database: "angular"
    };
 
