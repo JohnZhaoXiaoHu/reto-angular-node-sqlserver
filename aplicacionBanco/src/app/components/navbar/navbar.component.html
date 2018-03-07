@@ -14,7 +14,7 @@
             aria-expanded="false">Servicios Cliente</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; this.model2.Cedula=this.cedLastUserReg">Solicitar Crédito</a>
-            <a class="dropdown-item" href="#">Créditos aprobados</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#Lcredit" (click)="seEncuentraCedulaCredito=true">Créditos aprobados</a>
 
           </div>
         </li>
@@ -179,7 +179,7 @@
             <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
           </div>
           <div class="modal-footer">
-            <button type="button" name="button" [disabled]="frm.invalid || seEncuetraCedula" class="btn btn-info btn-lg" id="crearCliente"
+            <button type="button" name="button" class="btn btn-info btn-lg" id="crearCliente"
               data-toggle="modal" data-target="#Modal" (click)="insertarCliente()" data-dismiss="modal">Crear usuario</button>
             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frm)">Cerrar</button>
           </div>
@@ -429,5 +429,49 @@
         </form>
       </div>
 
+    </div>
+  </div>
+</div>
+
+  <!-- listar usuarios -->
+  <div class="modal fade" id="Lcredit" role="dialog">
+    <div class="modal-dialog">
+     <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Listar créditos</h4>
+        </div>
+        <div class="modal-body">
+          <form #frms="ngForm" (ngSubmit)="Login(frms)">
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Ingrese cédula</label>
+            <input type="text" name="cedula3" class="form-control" #ced3User="ngModel" ngModel required id="cedula3" placeholder="ingrese minimo 6 digitos del 0 al 9 y maximo 10"
+              pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" maxlength="10" [(ngModel)]="model3.Cedula" (blur)="verificarCedulaCredito()"
+              (click)="seEncuentraCedulaCredito=true"> 
+            <p id="cedula2"></p>
+          </div>
+          <!-- validaciones  -->       
+          <div *ngIf="!seEncuentraCedulaCredito"  class="alert alert-danger">
+            No se encuentra cedula
+          </div>
+          <div *ngIf="ced3User?.touched">
+            <div *ngIf="ced3User.errors?.required" class="alert alert-danger">Este campo es requerido</div>
+          </div>
+          <div *ngIf="ced3User?.dirty">
+            <div *ngIf="ced3User.errors?.pattern" class="alert alert-danger">
+              Cedula no valida. Ingrese solo números
+            </div>
+            <div *ngIf="!ced3User.errors?.pattern && !ced3User.errors?.required && ced3User.errors?.minlength" class="alert alert-warning">
+              Ingrese su cedula completa
+            </div>
+          </div>
+            <div class="modal-footer">
+              <button type="button" data-target="" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
+                id="listarCreditos" [disabled]="frms.invalid || !seEncuentraCedulaCredito"  >Listar mis créditos</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mostrarCreditos()">Cerrar</button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>

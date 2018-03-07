@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-marketing',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./marketing.component.css']
 })
 export class MarketingComponent implements OnInit {
+
+  @Input() ocultarMarketing: boolean;
 
   constructor() { }
 

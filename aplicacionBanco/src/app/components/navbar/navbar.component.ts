@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, Input } from '@angular/core';
+import { Component, ViewChild, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PostService } from '../../../app/posts.service';
 import { NgForm, Form, FormGroup, FormsModule } from '@angular/forms';
 import { Cliente } from '../../../app/app.component';
@@ -26,11 +26,14 @@ export class NavbarComponent implements OnInit {
   check: Cliente;
   model: any = {};
   model2: any = {};
+  model3: any = {};
   check2: Solicitud;
   seEncuetraCedula: boolean = false;
   seEncuetraUsuario: boolean = false;
   seEncuentraCedulaSolicitud: boolean = false;
   seEncuentraSalario: boolean = true;
+  seEncuentraCedulaCredito: boolean = false;
+
   nit1: string;
   nit2: string;
   nit3: string;
@@ -38,21 +41,20 @@ export class NavbarComponent implements OnInit {
   fechactual: string;
   mayor18: boolean;
   fechactual1: string;
-  credito:Credito={ id_Solicitud:"",Cedula:"",Cantidad:"",fecha_Creacion:""};
+  credito: Credito = { id_Solicitud: "", Cedula: "", Cantidad: "", fecha_Creacion: "" };
   cedLastUserReg: String;
 
-  public mask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,'-', /\d/];
+  public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
+  @Output() messageEvent = new EventEmitter<boolean>();
 
-  constructor(private postService: PostService) { 
-    
-  }
+  constructor(private postService: PostService) { }
 
-  salarioVacio(){
-    if(this.model2.Salario==null || isNaN(this.model2.Salario) ){
-      this.seEncuentraSalario=false;
-    }else{
-      this.seEncuentraSalario=true;
+  salarioVacio() {
+    if (this.model2.Salario == null || isNaN(this.model2.Salario)) {
+      this.seEncuentraSalario = false;
+    } else {
+      this.seEncuentraSalario = true;
     }
     //console.log(this.model2.Salario);
     //console.log(this.seEncuentraSalario);
@@ -64,33 +66,33 @@ export class NavbarComponent implements OnInit {
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
 
     if (this.seEncuentraCedulaSolicitud) {
-      this.model2.fecha_Creacion=new Date().toLocaleString();
+      this.model2.fecha_Creacion = new Date().toLocaleString();
 
       this.postService.insertSolicitud(this.model2).subscribe(posts => {
 
-        
+
         //console.log("respuesta del back:" + posts);
         this.check2 = posts;
         if (this.antiguedadAñoYmedio() && this.model2.Salario >= 800000) {
-          let prestamo:string;
+          let prestamo: string;
 
           this.mensajeModal = "Credito aceptado";
           if (this.model2.Salario >= 800000 && this.model2.Salario < 1000000) {
-            prestamo='5.000.000';
+            prestamo = '5.000.000';
             this.mensajeModal += "\n por el monto de $ 5.000.000";
           } else if (this.model2.Salario >= 1000000 && this.model2.Salario < 4000000) {
-            prestamo='20.000.000';
+            prestamo = '20.000.000';
             this.mensajeModal += "\n por el monto de $ 20.000.000";
           } else if (this.model2.Salario >= 4000000) {
-            prestamo='50.000.000';
+            prestamo = '50.000.000';
             this.mensajeModal += "\n por el monto de $ 50.000.000";
 
           }
-         console.log("fecha creacion solicitud:"+this.model2.fecha_Creacion);
-          this.credito.id_Solicitud= this.model2.fecha_Creacion;
-          this.credito.Cedula=this.model2.Cedula;
-          this.credito.Cantidad=prestamo;
-          this.credito.fecha_Creacion=new Date().toLocaleString();
+          console.log("fecha creacion solicitud:" + this.model2.fecha_Creacion);
+          this.credito.id_Solicitud = this.model2.fecha_Creacion;
+          this.credito.Cedula = this.model2.Cedula;
+          this.credito.Cantidad = prestamo;
+          this.credito.fecha_Creacion = new Date().toLocaleString();
           this.insertarCredito();
           //console.log("solicitud creada exitosamente!!");
         } else {
@@ -101,9 +103,9 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  insertarCredito(){
-    this.postService.insertCredito(this.credito).subscribe(data =>{
-        console.log("credito exitosamente ingresado!!");
+  insertarCredito() {
+    this.postService.insertCredito(this.credito).subscribe(data => {
+      console.log("credito exitosamente ingresado!!");
     });
   }
 
@@ -113,8 +115,8 @@ export class NavbarComponent implements OnInit {
         console.log("respuesta del server:" + posts);
         this.check = posts;
         this.mensajeModal = "Usuario ingresado exitosamente!!";
-        this.cedLastUserReg=this.model.Cedula;
-        
+        this.cedLastUserReg = this.model.Cedula;
+
       });
     }
 
@@ -125,7 +127,7 @@ export class NavbarComponent implements OnInit {
     form.resetForm(); // or form.reset();
   }
 
- 
+
 
   verificarCedulaCliente() {
     this.seEncuetraCedula = false;
@@ -168,6 +170,33 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  verificarCedulaCredito() {
+
+    //console.log("cambio el campo cedula:" + this.model3.Cedula);
+    if (this.model3.Cedula.length >= 6) {
+
+      this.postService.buscarClientePorCedula(this.model3.Cedula).subscribe(data => {
+
+        console.log(data);
+        console.log("cambio el campo cedula:" + this.model3.Cedula);
+        if (data[0]) {
+          if (this.model3.Cedula == data[0].Cedula) {
+            console.log("Si existe la cedula");
+            this.seEncuentraCedulaCredito = true;
+          }
+        }
+        else {
+          this.seEncuentraCedulaCredito = false;
+          console.log("No existe la cedula");
+        }
+
+      });
+    }
+  }
+  mostrarCreditos(){
+    this.messageEvent.emit(false);
+    console.log("mensaje enviado");
+  }
   ngOnInit() {
 
     this.fechactual = new Date().toString();
