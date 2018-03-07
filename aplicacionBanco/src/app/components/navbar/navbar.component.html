@@ -346,7 +346,7 @@
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
-            <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask}"  class="form-control" ngModel [(ngModel)]="model2.nit_Empresa" id="NIT"  
+            <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel [(ngModel)]="model2.nit_Empresa" id="NIT"  
             name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" required>
           </div>
 
@@ -354,7 +354,7 @@
             <div *ngIf="NitCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
           </div>
           <div *ngIf="NitCli?.dirty">
-              <div *ngIf="NIT?.value.length == 13" class="alert alert-danger">
+              <div *ngIf="NitCli.errors?.minlength" class="alert alert-danger">
                   Ingrese el Nit completo
               </div>
             </div>
@@ -389,7 +389,7 @@
             <label for="recipient-name" class="form-control-label">Salario actual:
             </label>
             <input #moneyCli="ngModel" currencyMask ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario (máximo de $ 99.999.999)"
-              name="salario" required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model2.Salario" maxlength="15" (blur)="salarioVacio()">
+              name="salario" required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model2.Salario" maxlength="15" (blur)="salarioVacio()" (keyup)="salarioVacio()">
             <p id="money"></p>
           </div>
 

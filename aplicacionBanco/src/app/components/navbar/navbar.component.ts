@@ -42,7 +42,9 @@ export class NavbarComponent implements OnInit {
   public mask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,'-', /\d/];
 
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) { 
+    
+  }
 
   salarioVacio(){
     if(this.model2.Salario==null || isNaN(this.model2.Salario) ){
