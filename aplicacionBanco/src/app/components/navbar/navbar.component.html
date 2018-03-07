@@ -295,25 +295,15 @@
             <div class="form-group">
               <label for="recipient-name" class="form-control-label">Cédula
               </label>
-<<<<<<< HEAD
-              <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Minimo 10 digitos del 0 al 9"
-<<<<<<< HEAD
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (change)="verificarCedula()" > 
-=======
+
               <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cédula"
                 pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedulaSolicitud()"
                  (click)="seEncuentraCedulaSolicitud=true" maxlength="12"> 
->>>>>>> camilo
-              <p id="cedula2"></p>
+              
+                 <p id="cedula2"></p>
             </div>
 
             <div *ngIf="!seEncuentraCedulaSolicitud"  class="alert alert-danger">
-=======
-                pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedula()" > 
-              <p id="cedula2"></p>
-            </div>
-            <div *ngIf="mostrarMensaje"  class="alert alert-danger">
->>>>>>> 2b48dcd224f028fc083bd6275b29e94ddc8fa22b
               Esta cédula no se encuentra registrada en el sistema
             </div>
   
