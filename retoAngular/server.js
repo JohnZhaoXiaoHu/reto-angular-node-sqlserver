@@ -123,6 +123,13 @@ app.get('/solicitud', function (req, res) {
                  ejecutarSentencia (res, query);
 });
 
+/*
+app.get('/solicitud/fecha_Creacion/:fecha_Creacion', function (req, res) {
+  console.log("realizando peticion get solicitudes!!");
+        var query = "select * from [Solicitud] where fecha_Creacion='"+req.params.fecha_Creacion+"'";
+                 ejecutarSentencia (res, query);
+});*/
+
 app.post("/solicitud/create", function(req , res){
                console.log("peticion post solicitudes!!");
 
@@ -141,8 +148,6 @@ app.post("/credito/create", function(req , res){
   var query = "INSERT INTO [Credito] (id_Solicitud,Cedula,Cantidad,fecha_Creacion) VALUES ('" + req.body.id_Solicitud+ "','" + req.body.Cedula + "','" + req.body.Cantidad  + "','" + req.body.fecha_Creacion +"')";
   ejecutarSentencia (res, query);
 });
-
-
 
 app.get('/credito', function (req, res) {
   console.log("realizando peticion get");

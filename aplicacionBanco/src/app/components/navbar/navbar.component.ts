@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
   fechactual: string;
   mayor18: boolean;
   fechactual1: string;
-  credito: Credito;
+  credito:Credito={ id_Solicitud:"",Cedula:"",Cantidad:"",fecha_Creacion:""};
   cedLastUserReg: String;
 
   public mask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,'-', /\d/];
@@ -65,19 +65,33 @@ export class NavbarComponent implements OnInit {
 
     if (this.seEncuentraCedulaSolicitud) {
       this.model2.fecha_Creacion=new Date().toLocaleString();
+
       this.postService.insertSolicitud(this.model2).subscribe(posts => {
+
+        
         //console.log("respuesta del back:" + posts);
         this.check2 = posts;
         if (this.antiguedadAñoYmedio() && this.model2.Salario >= 800000) {
+          let prestamo:string;
+
           this.mensajeModal = "Credito aceptado";
           if (this.model2.Salario >= 800000 && this.model2.Salario < 1000000) {
-            this.mensajeModal += "\n por el monto de 5000000";
+            prestamo='5.000.000';
+            this.mensajeModal += "\n por el monto de $ 5.000.000";
           } else if (this.model2.Salario >= 1000000 && this.model2.Salario < 4000000) {
-            this.mensajeModal += "\n por el monto de 20000000";
+            prestamo='20.000.000';
+            this.mensajeModal += "\n por el monto de $ 20.000.000";
           } else if (this.model2.Salario >= 4000000) {
-            this.mensajeModal += "\n por el monto de 50000000";
+            prestamo='50.000.000';
+            this.mensajeModal += "\n por el monto de $ 50.000.000";
 
           }
+         console.log("fecha creacion solicitud:"+this.model2.fecha_Creacion);
+          this.credito.id_Solicitud= this.model2.fecha_Creacion;
+          this.credito.Cedula=this.model2.Cedula;
+          this.credito.Cantidad=prestamo;
+          this.credito.fecha_Creacion=new Date().toLocaleString();
+          this.insertarCredito();
           //console.log("solicitud creada exitosamente!!");
         } else {
           this.mensajeModal = "Credito no aceptado";
@@ -85,6 +99,12 @@ export class NavbarComponent implements OnInit {
 
       });
     }
+  }
+
+  insertarCredito(){
+    this.postService.insertCredito(this.credito).subscribe(data =>{
+        console.log("credito exitosamente ingresado!!");
+    });
   }
 
   insertarCliente() {
