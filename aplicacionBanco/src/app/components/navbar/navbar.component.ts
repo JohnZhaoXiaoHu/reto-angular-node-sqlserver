@@ -14,15 +14,13 @@ import { VALID } from '@angular/forms/src/model';
 
 })
 
-
-
 export class NavbarComponent implements OnInit {
   clientes: Cliente[];
-  mensajeCedulaCliente = "Este campo es requerido";
   mensajeUsuarioCliente = "Este campo es requerido";
   mensajeModal = "";
-  mostrarMensaje: boolean = false;
   mensajeCedulaSolicitud = "";
+  mostrarMensaje: boolean = false;
+  mostrarMensaje2: boolean = false;
   check: Cliente;
 
   model: any = {};
@@ -40,19 +38,12 @@ export class NavbarComponent implements OnInit {
   fechactual1: string;
   credito: Credito;
 
-  
-
-
-  constructor( private postService:PostService){}
-
-
+  constructor(private postService: PostService) { }
 
   insertarSolicitud() {
     this.mensajeModal = "";
     this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
-
-
 
     if (this.seEncuentraCedulaSolicitud) {
       this.postService.insertSolicitud(this.model2).subscribe(posts => {
@@ -74,95 +65,86 @@ export class NavbarComponent implements OnInit {
         }
 
       });
-      this.seEncuentraCedulaSolicitud = false;
     }
-
   }
 
-
-  insertarCliente(){
-    if(!this.seEncuetraCedula && !this.seEncuetraUsuario){
-      this.postService.insertCliente(this.model).subscribe(posts=>{
-        console.log("respuesta del server:"+posts);
-        this.check= posts;
-        this.mensajeModal="Usuario ingresado exitosamente!!";
+  insertarCliente() {
+    if (!this.seEncuetraCedula && !this.seEncuetraUsuario) {
+      this.postService.insertCliente(this.model).subscribe(posts => {
+        console.log("respuesta del server:" + posts);
+        this.check = posts;
+        this.mensajeModal = "Usuario ingresado exitosamente!!";
       });
     }
   }
 
-
-
-  
   resetForm(form: NgForm) {
     form.resetForm(); // or form.reset();
   }
 
+  verificarUsuarioCliente() {
+    this.seEncuetraUsuario = false;
+    if (this.model.Usuario.length >= 5) {
 
 
-
-  verificarUsuarioCliente(){
-    this.seEncuetraUsuario=false;
-
-      this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data=>{
-          console.log(data);
-          if(data[0]){
-            if(this.model.Usuario==data[0].Usuario){
-              console.log(this.model.Usuario+"="+data[0].Usuario);
-                this.seEncuetraUsuario=true;
-                console.log(this.seEncuetraUsuario);
-            }
-            if(this.seEncuetraUsuario){
-              this.model.Usuario='';
-              this.mensajeUsuarioCliente = "Este usuario ya se encuentra registrado en el sistema";
-            }
-
+      this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data => {
+        console.log(data);
+        if (data[0]) {
+          if (this.model.Usuario == data[0].Usuario) {
+            console.log(this.model.Usuario + "=" + data[0].Usuario);
+            this.seEncuetraUsuario = true;
+            console.log(this.seEncuetraUsuario);
           }
+        }
 
       });
+    }
   }
 
-  verificarCedulaCliente(){
-    this.seEncuetraCedula=false;
-    console.log("cambio el campo cedula:"+this.model.cedula);
-    this.postService.buscarClientePorCedula(this.model.Cedula).subscribe(data=>{
+  verificarCedulaCliente() {
+    this.seEncuetraCedula = false;
+    //console.log("cambio el campo cedula:" + this.model.cedula);
+    if (this.model.Cedula.length >= 6) {
+
+      this.postService.buscarClientePorCedula(this.model.Cedula).subscribe(data => {
         console.log(data);
-         if(data[0]){
-          if(this.model.Cedula==data[0].Cedula){
+        if (data[0]) {
+          if (this.model.Cedula == data[0].Cedula) {
             console.log("Si existe la cedula");
-            this.seEncuetraCedula=true;
+            this.seEncuetraCedula = true;
           }
         }
 
-        if(this.seEncuetraCedula){
-          this.model.Cedula="";
-          this.mensajeCedulaCliente="Esta cédula ya se encuentra registrada en el sistema";
-        }
-    });
+      });
+    }
   }
 
+  verificarCedulaSolicitud() {
+    
+    //console.log("cambio el campo cedula:" + this.model2.cedula);
+    if (this.model2.Cedula.length >= 6) {
 
-
- 
-  verificarCedula(){
-    this.seEncuentraCedulaSolicitud=false;
-    this.mensajeCedulaSolicitud="";
-    console.log("cambio el campo cedula:"+this.model2.cedula);
-    this.postService.buscarClientePorCedula(this.model2.Cedula).subscribe(data=>{
+      this.postService.buscarClientePorCedula(this.model2.Cedula).subscribe(data => {
         console.log(data);
-         if(data[0]){
-          if(this.model2.Cedula==data[0].Cedula){
+        if (data[0]) {
+          if (this.model2.Cedula == data[0].Cedula) {
             console.log("Si existe la cedula");
-            this.seEncuentraCedulaSolicitud=true;
-            this.mostrarMensaje=false;
+            this.seEncuentraCedulaSolicitud = true;
           }
         }
+<<<<<<< HEAD
 
         if(!this.seEncuentraCedulaSolicitud){
           this.mostrarMensaje=true;
           this.mensajeCedulaSolicitud="Esta cédula no se encuentra registrada en el sistema";
+=======
+        else{
+          this.seEncuentraCedulaSolicitud = false;
+>>>>>>> camilo
         }
-    });
 
+      });
+    }
   }
 
   ngOnInit() {
@@ -239,4 +221,3 @@ export class NavbarComponent implements OnInit {
 
 }
 
-  
