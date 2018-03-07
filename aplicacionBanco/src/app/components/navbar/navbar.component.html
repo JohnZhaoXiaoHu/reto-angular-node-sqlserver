@@ -13,7 +13,7 @@
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Servicios Cliente</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true">Solicitar Crédito</a>
+            <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; this.model2.Cedula=this.cedLastUserReg">Solicitar Crédito</a>
             <a class="dropdown-item" href="#">Créditos aprobados</a>
 
           </div>
@@ -324,7 +324,7 @@
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Empresa:
             </label>
-            <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese nombre de la empresa"
+            <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese el nombre de la empresa"
               name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*"
               maxlength="30">
             <p id="NEmp"></p>
@@ -347,7 +347,7 @@
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
             <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel [(ngModel)]="model2.nit_Empresa" id="NIT"  
-            name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" required>
+            name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" required placeholder="Ingrese el nit de la empresa">
           </div>
 
           <div *ngIf="NitCli?.touched">

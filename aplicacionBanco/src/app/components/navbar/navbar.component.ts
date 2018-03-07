@@ -39,6 +39,8 @@ export class NavbarComponent implements OnInit {
   mayor18: boolean;
   fechactual1: string;
   credito: Credito;
+  cedLastUserReg: String;
+
   public mask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,'-', /\d/];
 
 
@@ -91,7 +93,8 @@ export class NavbarComponent implements OnInit {
         console.log("respuesta del server:" + posts);
         this.check = posts;
         this.mensajeModal = "Usuario ingresado exitosamente!!";
-
+        this.cedLastUserReg=this.model.Cedula;
+        
       });
     }
 
