@@ -38,10 +38,4 @@ export class PostService {
     return this.http.get('http://localhost:8080/cliente/cedula/'+cedula);
   }
 
-  buscarClientePorUsuario(usuario:string){
-    return this.http.get('http://localhost:8080/cliente/usuario/'+usuario);
-  }
-
-
-
 }

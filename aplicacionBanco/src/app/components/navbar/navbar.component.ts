@@ -30,6 +30,7 @@ export class NavbarComponent implements OnInit {
   seEncuetraCedula: boolean = false;
   seEncuetraUsuario: boolean = false;
   seEncuentraCedulaSolicitud: boolean = false;
+  seEncuentraSalario: boolean = true;
   nit1: string;
   nit2: string;
   nit3: string;
@@ -38,15 +39,28 @@ export class NavbarComponent implements OnInit {
   mayor18: boolean;
   fechactual1: string;
   credito: Credito;
+  public mask = [ /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/,'-', /\d/];
+
 
   constructor(private postService: PostService) { }
 
+  salarioVacio(){
+    if(this.model2.Salario==null || isNaN(this.model2.Salario) ){
+      this.seEncuentraSalario=false;
+    }else{
+      this.seEncuentraSalario=true;
+    }
+    //console.log(this.model2.Salario);
+    //console.log(this.seEncuentraSalario);
+  }
+
   insertarSolicitud() {
     this.mensajeModal = "";
-    this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
+    //this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
 
     if (this.seEncuentraCedulaSolicitud) {
+      this.model2.fecha_Creacion=new Date().toLocaleString();
       this.postService.insertSolicitud(this.model2).subscribe(posts => {
         //console.log("respuesta del back:" + posts);
         this.check2 = posts;
@@ -70,7 +84,7 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarCliente() {
-    if (!this.seEncuetraCedula && !this.seEncuetraUsuario) {
+    if (!this.seEncuetraCedula) {
       this.postService.insertCliente(this.model).subscribe(posts => {
         console.log("respuesta del server:" + posts);
         this.check = posts;
@@ -86,24 +100,7 @@ export class NavbarComponent implements OnInit {
     form.resetForm(); // or form.reset();
   }
 
-  verificarUsuarioCliente() {
-    this.seEncuetraUsuario = false;
-    if (this.model.Usuario.length >= 5) {
-
-      this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data => {
-        console.log(data);
-        if (data[0]) {
-          if (this.model.Usuario == data[0].Usuario) {
-            console.log(this.model.Usuario + "=" + data[0].Usuario);
-            this.seEncuetraUsuario = true;
-            console.log(this.seEncuetraUsuario);
-          }
-        }
-
-
-      });
-    }
-  }
+ 
 
   verificarCedulaCliente() {
     this.seEncuetraCedula = false;

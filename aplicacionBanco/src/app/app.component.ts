@@ -45,7 +45,6 @@ export interface Cliente {
   Apellido: string;
   Cedula: string;
   fecha_Nacimiento: string;
-  Usuario: string;
 }
 
 
@@ -55,11 +54,13 @@ export interface Solicitud {
   nit_Empresa: string;
   fecha_Ingreso: string;
   Salario: string;
+  fecha_Creacion: string;
 }
 
 export interface Credito {
   id_Solicitud: string;
   Cedula: string;
   Cantidad: string;
+  fecha_Creacion: string;
 }
 

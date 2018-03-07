@@ -75,10 +75,11 @@ var  executeQuery = function(respond,query){
                     request.query(query, function (err, res) {
                       if (err) {
                                  console.log("Error while querying database :- " + err);
+                                 console.log(err);
                                  respond.send(err);
                                 }
                                 else {
-                                  //onsole.log(res);
+                                  console.log(res);
                                   respond.json(res);
                                  }
                           });
@@ -93,12 +94,6 @@ var  executeQuery = function(respond,query){
 app.get('/cliente/cedula/:cedula',function(req,res){
       console.log("buscando cliente por cedula:"+req.params.cedula);
       var consulta = "select * from [Cliente] where Cedula='"+req.params.cedula+"'";
-      ejecutarSentencia(res,consulta);
-});
-
-app.get('/cliente/usuario/:usuario',function(req,res){
-      console.log("buscando cliente por usuario:"+req.params.usuario);
-      var consulta = "select * from [Cliente] where Usuario='"+req.params.usuario+"'";
       ejecutarSentencia(res,consulta);
 });
 
@@ -117,7 +112,7 @@ app.get('/cliente', function (req, res) {
 
                 console.log(req.body);
 
-                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,Usuario,fecha_Nacimiento) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula + "','" + req.body.Usuario  +  "','" + req.body.fecha_Nacimiento + "')";
+                var query = "INSERT INTO [Cliente] (Nombre,Apellido,Cedula,fecha_Nacimiento) VALUES ('" + req.body.Nombre + "','" + req.body.Apellido + "','" + req.body.Cedula +  "','" + req.body.fecha_Nacimiento + "')";
                 ejecutarSentencia (res, query);
 
 });
@@ -133,7 +128,7 @@ app.post("/solicitud/create", function(req , res){
 
                console.log(req.body);
 
-               var query = "INSERT INTO [Solicitud] (Cedula,Empresa,nit_Empresa,fecha_Ingreso,Salario) VALUES ('" + req.body.Cedula + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_Ingreso  +  "','" + req.body.Salario + "')";
+               var query = "INSERT INTO [Solicitud] (Cedula,Empresa,nit_Empresa,fecha_Ingreso,Salario,fecha_Creacion) VALUES ('" + req.body.Cedula + "','" + req.body.Empresa + "','" + req.body.nit_Empresa + "','" + req.body.fecha_Ingreso  +  "','" + req.body.Salario + "','" + req.body.fecha_Creacion + "')";
                ejecutarSentencia (res, query);
 });
 
@@ -143,7 +138,7 @@ app.post("/credito/create", function(req , res){
 
   console.log(req.body);
 
-  var query = "INSERT INTO [Credito] (id_Solicitud,Cedula,Cantidad) VALUES ('" + req.body.id_Solicitud+ "','" + req.body.Cedula + "','" + req.body.Cantidad  + "')";
+  var query = "INSERT INTO [Credito] (id_Solicitud,Cedula,Cantidad,fecha_Creacion) VALUES ('" + req.body.id_Solicitud+ "','" + req.body.Cedula + "','" + req.body.Cantidad  + "','" + req.body.fecha_Creacion +"')";
   ejecutarSentencia (res, query);
 });
 
