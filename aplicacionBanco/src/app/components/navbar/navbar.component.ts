@@ -16,13 +16,14 @@ import { VALID } from '@angular/forms/src/model';
 
 export class NavbarComponent implements OnInit {
   clientes: Cliente[];
+
   mensajeUsuarioCliente = "Este campo es requerido";
   mensajeModal = "";
   mensajeCedulaSolicitud = "";
   mostrarMensaje: boolean = false;
   mostrarMensaje2: boolean = false;
-  check: Cliente;
 
+  check: Cliente;
   model: any = {};
   model2: any = {};
   check2: Solicitud;
@@ -74,8 +75,11 @@ export class NavbarComponent implements OnInit {
         console.log("respuesta del server:" + posts);
         this.check = posts;
         this.mensajeModal = "Usuario ingresado exitosamente!!";
+
       });
     }
+
+
   }
 
   resetForm(form: NgForm) {
@@ -86,7 +90,6 @@ export class NavbarComponent implements OnInit {
     this.seEncuetraUsuario = false;
     if (this.model.Usuario.length >= 5) {
 
-
       this.postService.buscarClientePorUsuario(this.model.Usuario).subscribe(data => {
         console.log(data);
         if (data[0]) {
@@ -96,6 +99,7 @@ export class NavbarComponent implements OnInit {
             console.log(this.seEncuetraUsuario);
           }
         }
+
 
       });
     }
@@ -117,14 +121,16 @@ export class NavbarComponent implements OnInit {
 
       });
     }
+
   }
 
   verificarCedulaSolicitud() {
-    
+
     //console.log("cambio el campo cedula:" + this.model2.cedula);
     if (this.model2.Cedula.length >= 6) {
 
       this.postService.buscarClientePorCedula(this.model2.Cedula).subscribe(data => {
+
         console.log(data);
         if (data[0]) {
           if (this.model2.Cedula == data[0].Cedula) {
@@ -132,15 +138,8 @@ export class NavbarComponent implements OnInit {
             this.seEncuentraCedulaSolicitud = true;
           }
         }
-<<<<<<< HEAD
-
-        if(!this.seEncuentraCedulaSolicitud){
-          this.mostrarMensaje=true;
-          this.mensajeCedulaSolicitud="Esta cédula no se encuentra registrada en el sistema";
-=======
-        else{
+        else {
           this.seEncuentraCedulaSolicitud = false;
->>>>>>> camilo
         }
 
       });

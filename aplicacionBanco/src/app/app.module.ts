@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CarouselComponent } from './components/carousel/carousel.component';
 import { MarketingComponent } from './components/marketing/marketing.component';
-
+import { CurrencyMaskModule } from "ng2-currency-mask";
 
 @NgModule({
   declarations: [
@@ -19,9 +19,10 @@ import { MarketingComponent } from './components/marketing/marketing.component';
     NavbarComponent,
     CarouselComponent,
     MarketingComponent
+    
   ],
   imports: [
-    BrowserModule , FormsModule, HttpClientModule, HttpModule, 
+    BrowserModule , FormsModule, HttpClientModule, HttpModule, CurrencyMaskModule
   ],
   providers: [],
   bootstrap: [AppComponent]
