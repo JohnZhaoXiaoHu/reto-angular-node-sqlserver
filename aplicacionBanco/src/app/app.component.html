@@ -9,7 +9,7 @@
   <app-marketing [ocultarMarketing]="ocultarMarketing"></app-marketing>
 </div>
 <div class="container">
-  <app-table [ocultarTable]="ocultarTable"> </app-table>
+  <app-table [ocultarTable]="ocultarTable" (messageEvent)="receiveMessage($event)"> </app-table>
 </div>
 
 

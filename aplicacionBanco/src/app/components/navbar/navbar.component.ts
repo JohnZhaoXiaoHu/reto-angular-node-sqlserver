@@ -198,6 +198,7 @@ export class NavbarComponent implements OnInit {
     this.messageEvent.emit(false);
     console.log("mensaje enviado");
   }
+  
   ngOnInit() {
 
     this.fechactual = new Date().toString();

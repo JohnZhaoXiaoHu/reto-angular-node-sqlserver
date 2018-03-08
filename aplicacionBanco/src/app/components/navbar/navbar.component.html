@@ -14,7 +14,7 @@
             aria-expanded="false">Servicios Cliente</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; this.model2.Cedula=this.cedLastUserReg">Solicitar Crédito</a>
-            <a class="dropdown-item" data-toggle="modal" data-target="#Lcredit" (click)="seEncuentraCedulaCredito=true">Créditos aprobados</a>
+            <a class="dropdown-item" data-toggle="modal" data-target="#Lcredit" (click)="resetForm(formcre); seEncuentraCedulaCredito=true">Créditos aprobados</a>
 
           </div>
         </li>
@@ -470,8 +470,8 @@
           </div>
             <div class="modal-footer">
               <button type="button" data-target="" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-                id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito"  >Listar mis créditos</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mostrarCreditos()">Cerrar</button>
+                id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito" (click)="mostrarCreditos()">Listar mis créditos</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
           </form>
         </div>

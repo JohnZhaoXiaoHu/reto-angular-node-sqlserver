@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -8,10 +8,15 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TableComponent implements OnInit {
 
   @Input() ocultarTable: boolean;
+  @Output() messageEvent = new EventEmitter<boolean>();
 
   constructor() { }
 
+  
   ngOnInit() {
   }
-
+  mostrarHome(){
+    this.messageEvent.emit(true);
+    console.log("mensaje enviado");
+  }
 }
