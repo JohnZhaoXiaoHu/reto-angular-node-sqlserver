@@ -211,21 +211,22 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  mostrarCreditos(){
+  mostrarCreditos(cedula:string){
     this.messageEvent.emit(false);
     console.log("mensaje enviado");
+    this.enviarDatosCreditos(this.model2.Cedula);
   }
 
 
-  enviarDatosCreditos(){
-    console.log("cedula:"+this.model3.Cedula);
-    this.postService.getCreditosPorCedula(this.model3.Cedula).subscribe(datos=>{
+  enviarDatosCreditos(cedula:string){
+    console.log("cedula:"+cedula);
+    this.postService.getCreditosPorCedula(cedula).subscribe(datos=>{
       console.log(datos);
       this.datos.emit(datos);
     });
     
   }
-  
+
   nuevaSolicitud(form: NgForm){
     this.model2.Salario=null;
     this.model2.fecha_Ingreso=" ";

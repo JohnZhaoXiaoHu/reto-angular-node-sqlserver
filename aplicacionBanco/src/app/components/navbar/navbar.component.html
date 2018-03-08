@@ -204,7 +204,7 @@
       </div>
       <div class="modal-footer" style="justify-content: center">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCredito" *ngIf="llave2"
-        (click)="mostrarCreditos()">Ver creditos</button>
+        (click)="mostrarCreditos(model2.Cedula)">Ver creditos</button>
        
         <button type="button" class="btn btn-default" data-dismiss="modal" id="botonSolicitud" href="#Scredit" data-toggle="modal"
         (click)="nuevaSolicitud(frms)" *ngIf="llave2">Crear Nueva Solicitud</button>
@@ -479,7 +479,7 @@
             <div class="modal-footer">
               <button type="button" data-target="" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
 
-                id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito" (click)="enviarDatosCreditos(); mostrarCreditos()"  >Listar mis créditos</button>
+                id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito" (click)="mostrarCreditos(model3.Cedula)"  >Listar mis créditos</button>
 
   
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(formcre)">Cerrar</button>
