@@ -6,6 +6,7 @@ import { Solicitud } from '../../../app/app.component';
 import { Credito } from '../../../app/app.component';
 import {CreditoCliente} from '../../../app/app.component';
 import { VALID } from '@angular/forms/src/model';
+import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -45,6 +46,7 @@ export class NavbarComponent implements OnInit {
   fechactual1: string;
   credito: Credito = { id_Solicitud: "", Cedula: "", Cantidad: "", fecha_Creacion: "" };
   cedLastUserReg: String;
+  colorMen: String;
 
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
@@ -64,6 +66,7 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarSolicitud() {
+    this.mensajeModal1 = "";
     this.mensajeModal2 = "";
     //this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
@@ -78,19 +81,20 @@ export class NavbarComponent implements OnInit {
         this.check2 = posts;
         if (this.antiguedadAñoYmedio() && this.model2.Salario >= 800000) {
           let prestamo: string;
+          this.mensajeModal1 = "Crédito aprobado";
+          this.colorMen="#0fad00";          
 
-          this.mensajeModal2 = "Credito aceptado";
           if (this.model2.Salario >= 800000 && this.model2.Salario < 1000000) {
             prestamo = '5.000.000';
-            this.mensajeModal2 += "\n por el monto de $ 5.000.000";
+            this.mensajeModal2 = " por el monto de $ 5.000.000";
           } else if (this.model2.Salario >= 1000000 && this.model2.Salario < 4000000) {
             prestamo = '20.000.000';
-            this.mensajeModal2 += "\n por el monto de $ 20.000.000";
+            this.mensajeModal2 = " por el monto de $ 20.000.000";
           } else if (this.model2.Salario >= 4000000) {
             prestamo = '50.000.000';
-            this.mensajeModal2 += "\n por el monto de $ 50.000.000";
-
+            this.mensajeModal2 = " por el monto de $ 50.000.000";
           }
+
           console.log("fecha creacion solicitud:" + this.model2.fecha_Creacion);
           this.credito.id_Solicitud = this.model2.fecha_Creacion;
           this.credito.Cedula = this.model2.Cedula;
@@ -99,7 +103,15 @@ export class NavbarComponent implements OnInit {
           this.insertarCredito();
           //console.log("solicitud creada exitosamente!!");
         } else {
-          this.mensajeModal2 = "Credito no aceptado";
+          this.mensajeModal1 = "Crédito no aprobado";
+          this.colorMen="red";
+          if(!this.antiguedadAñoYmedio()){
+            this.mensajeModal2 = "Debido a que no lleva trabajando más de un año y medio";
+          }
+          if(this.model2.Salario < 800000){
+            this.mensajeModal2 = "Debido a que su salario es menor a $ 800.000";
+          }
+          
         }
 
       });
@@ -113,13 +125,16 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarCliente() {
+    this.mensajeModal1 = "";
+    this.mensajeModal2 = "";
     if (!this.seEncuetraCedula) {
       this.postService.insertCliente(this.model).subscribe(posts => {
         console.log("respuesta del server:" + posts);
         this.check = posts;
+        this.mensajeModal1 = "Registro aprobado";
         this.mensajeModal2 = this.model.Nombre+" "+this.model.Apellido+" has sido agregado exitosamente";
+        this.colorMen="#0fad00";
         this.cedLastUserReg = this.model.Cedula;
-
       });
     }
 
