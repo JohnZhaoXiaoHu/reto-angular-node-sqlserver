@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {CreditoCliente} from '../../../app/app.component';
 
 @Component({
   selector: 'app-table',
@@ -8,6 +9,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class TableComponent implements OnInit {
 
   @Input() ocultarTable: boolean;
+  @Input() creditoCliente:CreditoCliente[];
 
   constructor() { }
 

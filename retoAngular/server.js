@@ -149,6 +149,13 @@ app.post("/credito/create", function(req , res){
   ejecutarSentencia (res, query);
 });
 
+app.get("/credito/cedula/:cedula",function(req,res){
+
+  console.log("buscar creditos por cliente:"+req.params.cedula);
+  var query ="select cr.id_Solicitud,c.Nombre,c.Apellido,c.Cedula,cr.Cantidad from Cliente c,Credito cr where c.Cedula='"+req.params.cedula+"' and cr.Cedula = '"+req.params.cedula+"'";
+  ejecutarSentencia(res,query);
+});
+
 app.get('/credito', function (req, res) {
   console.log("realizando peticion get");
         var query = "select * from [Credito]";

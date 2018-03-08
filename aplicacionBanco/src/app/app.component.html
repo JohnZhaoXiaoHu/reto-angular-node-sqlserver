@@ -1,5 +1,5 @@
 
-<app-navbar (messageEvent)="receiveMessage($event)"></app-navbar>
+<app-navbar (messageEvent)="receiveMessage($event)" (datos)="recibirDatos($event)"></app-navbar>
 <br>
 <div class="container">
   <app-carousel [ocultarCarrusel]="ocultarCarrusel" ></app-carousel>
@@ -9,7 +9,7 @@
   <app-marketing [ocultarMarketing]="ocultarMarketing"></app-marketing>
 </div>
 <div class="container">
-  <app-table [ocultarTable]="ocultarTable"> </app-table>
+  <app-table [ocultarTable]="ocultarTable"  [creditoCliente]="creditoCliente"> </app-table>
 </div>
 
 

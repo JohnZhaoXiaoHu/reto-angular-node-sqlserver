@@ -4,6 +4,7 @@ import { NgForm, Form, FormGroup, FormsModule } from '@angular/forms';
 import { Cliente } from '../../../app/app.component';
 import { Solicitud } from '../../../app/app.component';
 import { Credito } from '../../../app/app.component';
+import {CreditoCliente} from '../../../app/app.component';
 import { VALID } from '@angular/forms/src/model';
 
 @Component({
@@ -48,6 +49,7 @@ export class NavbarComponent implements OnInit {
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
   @Output() messageEvent = new EventEmitter<boolean>();
+  @Output() datos = new EventEmitter<CreditoCliente[]>();
 
   constructor(private postService: PostService) { }
 
@@ -194,10 +196,21 @@ export class NavbarComponent implements OnInit {
       });
     }
   }
+
   mostrarCreditos(){
     this.messageEvent.emit(false);
     console.log("mensaje enviado");
   }
+
+  enviarDatosCreditos(){
+    console.log("cedula:"+this.model3.Cedula);
+    this.postService.getCreditosPorCedula(this.model3.Cedula).subscribe(datos=>{
+      console.log(datos);
+      this.datos.emit(datos);
+    });
+    
+  }
+
   ngOnInit() {
 
     this.fechactual = new Date().toString();

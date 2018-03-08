@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { Cliente } from './app.component'
 import { Solicitud } from './app.component'
 import { Credito } from './app.component'
-
+import {CreditoCliente} from './app.component'
 
 @Injectable()
 export class PostService {
@@ -38,6 +38,8 @@ export class PostService {
     return this.http.get('http://localhost:8080/cliente/cedula/'+cedula);
   }
 
-
+  getCreditosPorCedula(cedula:string):Observable<CreditoCliente[]>{
+    return this.http.get<CreditoCliente[]>('http://localhost:8080/credito/cedula/'+cedula);
+  }
 
 }

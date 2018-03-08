@@ -5,24 +5,21 @@
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">Id usuario</th>
+        <th scope="col">fecha aprobado</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
-        <th scope="col">Id solicitud</th>
-        <th scope="col">Id prestamo</th>
-        <th scope="col">Monto</th>
+        <th scope="col">Cedula</th>
+        <th scope="col">Cantidad</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
-        <td>Juan</td>
-        <td>cardenas</td>
-        <td>1</td>
-        <td>1</td>
-        <td>50000000</td>
+      <tr *ngFor="let clienteC of creditoCliente">
+        <td>{{clienteC.id_Solicitud}}</td>
+        <td>{{clienteC.Nombre}}</td>
+        <td>{{clienteC.Apellido}}</td>
+        <td>{{clienteC.Cedula}}</td>
+        <td>{{clienteC.Cantidad}}</td>
       </tr>
-
     </tbody>
   </table>
 </div>

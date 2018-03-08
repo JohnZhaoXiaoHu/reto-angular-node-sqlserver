@@ -16,11 +16,16 @@ export class AppComponent {
   ocultarCarrusel= true;
   ocultarMarketing = true;
   ocultarTable = false;
+  creditoCliente:CreditoCliente[];
 
   receiveMessage($event) {
     this.ocultarCarrusel = $event;
     this.ocultarMarketing = $event;
     this.ocultarTable = !$event;
+  }
+
+  recibirDatos($event){
+    this.creditoCliente=$event;
   }
   
 }
@@ -47,5 +52,14 @@ export interface Credito {
   Cedula: string;
   Cantidad: string;
   fecha_Creacion: string;
+}
+
+
+export interface CreditoCliente{
+  id_Solicitud: string;
+  Nombre:string,
+  Apellido:string,
+  Cedula: string;
+  Cantidad: string;
 }
 
