@@ -13,19 +13,18 @@
           <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Servicios Cliente</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; this.model2.Cedula=this.cedLastUserReg">Solicitar Crédito</a>
+            <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; 
+            seEncuentraSalario=true; this.model2.Cedula=this.cedLastUserReg; llave=false; llave2=true">Solicitar Crédito</a>
 
             <a class="dropdown-item" style="cursor:pointer "  data-toggle="modal" data-target="#Lcredit" (click)="resetForm(formcre); seEncuentraCedulaCredito=true">Créditos aprobados</a>
-
-
           </div>
         </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <div class="container">
 
-          <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" (click)="resetForm(frm); seEncuetraCedula=false; seEncuetraUsuario=false"
-            id="register">Registrarse </button>
+          <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" 
+          (click)="resetForm(frm); seEncuetraCedula=false; seEncuetraUsuario=false; llave2=false" sid="register">Registrarse </button>
           <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
         </div>
       </form>
@@ -48,7 +47,7 @@
             <label for="recipient-name" class="form-control-label">Nombre:
             </label>
             <input type="text" name="name" class="form-control" #nameUser="ngModel" ngModel required id="nombre" placeholder="Ingrese Nombre"
-              pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Nombre">
+              pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Nombre" >
             <p id="Nombre"></p>
           </div>
 
@@ -203,8 +202,13 @@
         <br><br> <h2 [ngStyle]="{'color': colorMen}">{{mensajeModal1}}</h2>
         <p>{{mensajeModal2}}</p>
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="ok">Cerrar</button>
+      <div class="modal-footer" style="justify-content: center">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCredito" *ngIf="llave2"
+        (click)="mostrarCreditos()">Ver creditos</button>
+       
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="botonSolicitud" href="#Scredit" data-toggle="modal"
+        (click)="nuevaSolicitud(frms)" *ngIf="llave2">Crear Nueva Solicitud</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCerrar">Cerrar</button>
       </div>
     </div>
 
@@ -302,7 +306,7 @@
 
             <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cédula"
               pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedulaSolicitud()"
-              (click)="seEncuentraCedulaSolicitud=true" maxlength="12">
+              (click)="seEncuentraCedulaSolicitud=true" maxlength="12" [disabled]="llave">
 
             <p id="cedula2"></p>
           </div>
@@ -330,7 +334,7 @@
             </label>
             <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese el nombre de la empresa"
               name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*"
-              maxlength="30">
+              maxlength="30" [disabled]="llave">
             <p id="NEmp"></p>
           </div>
 
@@ -350,8 +354,9 @@
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
-            <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel [(ngModel)]="model2.nit_Empresa" id="NIT"  
-            name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" required placeholder="Ingrese el nit de la empresa">
+            <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel 
+            [(ngModel)]="model2.nit_Empresa" id="NIT" name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" 
+            required placeholder="Ingrese el nit de la empresa" [disabled]="llave">
           </div>
 
           <div *ngIf="NitCli?.touched">
@@ -393,8 +398,8 @@
             <label for="recipient-name" class="form-control-label">Salario actual:
             </label>
             <input #moneyCli="ngModel" currencyMask ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario (máximo de $ 99.999.999)"
-              name="salario" required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model2.Salario" maxlength="11" 
-              (blur)="salarioVacio()" (keyup)="salarioVacio()" [options]="{ prefix: '$', thousands: ',', precision: '0' }">
+              name="salario" required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model2.Salario" maxlength="12" 
+              (blur)="salarioVacio()" (keyup)="salarioVacio()" [options]="{ prefix: '$ ', thousands: ',', precision: '0' }">
             <p id="money"></p>
           </div>
 
@@ -430,7 +435,7 @@
             <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal"
               id="realizarSolicitud" [disabled]="frms.invalid || !seEncuentraCedulaSolicitud || !seEncuentraSalario" (click)="insertarSolicitud()">Realizar Solicitud</button>
 
-            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms); mostrarMensaje=false">Cerrar</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms)">Cerrar</button>
           </div>
         </form>
       </div>
@@ -476,7 +481,8 @@
 
                 id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito" (click)="enviarDatosCreditos(); mostrarCreditos()"  >Listar mis créditos</button>
 
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+  
+              <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(formcre)">Cerrar</button>
             </div>
           </form>
         </div>
