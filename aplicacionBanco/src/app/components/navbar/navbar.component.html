@@ -52,12 +52,12 @@
           </div>
 
           <div *ngIf="nameUser?.touched">
-            <div *ngIf="nameUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="nameUser.errors?.required" class="alert alert-danger" id="a1"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="nameUser?.dirty">
 
-            <div *ngIf="nameUser.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="nameUser.errors?.pattern" class="alert alert-danger" id="a2">
 
               Nombre no válido. Ingrese solo letras
             </div>
@@ -72,12 +72,12 @@
           </div>
 
           <div *ngIf="lastnameUser?.touched">
-            <div *ngIf="lastnameUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="lastnameUser.errors?.required" class="alert alert-danger" id="a3"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="lastnameUser?.dirty">
 
-            <div *ngIf="lastnameUser.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="lastnameUser.errors?.pattern" class="alert alert-danger" id="a4">
 
               Apellido no válido. Ingrese solo letras
             </div>
@@ -94,20 +94,20 @@
             <p id="cedula"></p>
           </div>
 
-          <div *ngIf="seEncuetraCedula" class="alert alert-danger">
+          <div *ngIf="seEncuetraCedula" class="alert alert-danger" id="a5">
             Esta cédula ya se encuentra registrada en el sistema
           </div>
 
           <div *ngIf="cedUser?.touched">
-            <div *ngIf="cedUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="cedUser.errors?.required" class="alert alert-danger" id="a6"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="cedUser?.dirty">
-            <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="cedUser.errors?.pattern" class="alert alert-danger" id="a7">
               Cédula no válida. Ingrese solo números
             </div>
 
-            <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning">
+            <div *ngIf="!cedUser.errors?.pattern && !cedUser.errors?.required && cedUser.errors?.minlength" class="alert alert-warning" id="a8"> 
               Ingrese su cédula completa
             </div>
           </div>
@@ -171,13 +171,13 @@
             <p id="fecha"></p>
           </div>
           <div *ngIf="calUser?.dirty">
-            <div *ngIf="mayor18 == false" class="alert alert-danger">
+            <div *ngIf="mayor18 == false" class="alert alert-danger" id="a9">
               La fecha ingresada no corresponde a una persona mayor de edad.
             </div>
           </div>
           
           <div *ngIf="calUser?.touched">
-            <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="calUser.errors?.required" class="alert alert-danger" id="a10"> Este campo es requerido</div>
           </div>
 
           <div class="modal-footer">
@@ -237,17 +237,17 @@
           </div>
 
           <div *ngIf="userlUser?.touched">
-            <div *ngIf="userlUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="userlUser.errors?.required" class="alert alert-danger" id="a11"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="userlUser?.dirty">
 
-            <div *ngIf="userlUser.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="userlUser.errors?.pattern" class="alert alert-danger" id="a12">
 
               Usuario no válido. Ingrese solo letra y números
             </div>
 
-            <div *ngIf="!userlUser.errors?.pattern && !userlUser.errors?.required && userlUser.errors?.minlength" class="alert alert-warning">
+            <div *ngIf="!userlUser.errors?.pattern && !userlUser.errors?.required && userlUser.errors?.minlength" class="alert alert-warning" id="a13">
 
               El usuario debe contener mínimo 5 letras o números
             </div>
@@ -262,17 +262,17 @@
           </div>
 
           <div *ngIf="passlUser?.touched">
-            <div *ngIf="passlUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="passlUser.errors?.required" class="alert alert-danger" id="a14"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="passlUser?.dirty">
 
-            <div *ngIf="passlUser.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="passlUser.errors?.pattern" class="alert alert-danger" id="a15">
 
               Contraseña no válida. Ingrese solo letra y números
             </div>
 
-            <div *ngIf="!passlUser.errors?.pattern && !passlUser.errors?.required && passlUser.errors?.minlength" class="alert alert-warning">
+            <div *ngIf="!passlUser.errors?.pattern && !passlUser.errors?.required && passlUser.errors?.minlength" class="alert alert-warning" id="a16">
 
               La contraseña no es segura
             </div>
@@ -311,20 +311,20 @@
             <p id="cedula2"></p>
           </div>
 
-          <div *ngIf="!seEncuentraCedulaSolicitud" class="alert alert-danger">
+          <div *ngIf="!seEncuentraCedulaSolicitud" class="alert alert-danger" id="a17">
             Esta cédula no se encuentra registrada en el sistema
           </div>
 
           <div *ngIf="ced2User?.touched">
-            <div *ngIf="ced2User.errors?.required" class="alert alert-danger">Este campo es requerido</div>
+            <div *ngIf="ced2User.errors?.required" class="alert alert-danger" id="a18">Este campo es requerido</div>
           </div>
 
           <div *ngIf="ced2User?.dirty">
-            <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger" id="a19">
               Cédula no válida. Ingrese solo números
             </div>
 
-            <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning">
+            <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning" id="a20">
               Ingrese su cédula completa
             </div>
           </div>
@@ -339,12 +339,12 @@
           </div>
 
           <div *ngIf="EmpCli?.touched">
-            <div *ngIf="EmpCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="EmpCli.errors?.required" class="alert alert-danger" id="a21"> Este campo es requerido</div>
           </div>
 
           <div *ngIf="EmpCli?.dirty">
 
-            <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger" id="a22">
 
               Nombre no válido. Ingrese solo letras
             </div>
@@ -360,10 +360,10 @@
           </div>
 
           <div *ngIf="NitCli?.touched">
-            <div *ngIf="NitCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="NitCli.errors?.required" class="alert alert-danger" id="a23"> Este campo es requerido</div>
           </div>
           <div *ngIf="NitCli?.dirty">
-              <div *ngIf="NitCli.errors?.minlength" class="alert alert-danger">
+              <div *ngIf="NitCli.errors?.minlength" class="alert alert-danger" id="a24">
                   Ingrese el Nit completo
               </div>
             </div>
@@ -403,7 +403,7 @@
             <p id="money"></p>
           </div>
 
-          <div *ngIf="!seEncuentraSalario" class="alert alert-danger">
+          <div *ngIf="!seEncuentraSalario" class="alert alert-danger" id="a25">
             Este campo es requerido
           </div>
 
@@ -428,7 +428,7 @@
           </div>
 
           <div *ngIf="dateCli?.touched">
-            <div *ngIf="dateCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+            <div *ngIf="dateCli.errors?.required" class="alert alert-danger" id="a26"> Este campo es requerido</div>
           </div>
 
           <div class="modal-footer">
@@ -462,17 +462,17 @@
             <p id="cedula2"></p>
           </div>
           <!-- validaciones  -->       
-          <div *ngIf="!seEncuentraCedulaCredito"  class="alert alert-danger">
+          <div *ngIf="!seEncuentraCedulaCredito"  class="alert alert-danger" id="a27">
             No se encuentra cedula
           </div>
           <div *ngIf="ced3User?.touched">
-            <div *ngIf="ced3User.errors?.required" class="alert alert-danger">Este campo es requerido</div>
+            <div *ngIf="ced3User.errors?.required" class="alert alert-danger" id="a28">Este campo es requerido</div>
           </div>
           <div *ngIf="ced3User?.dirty">
-            <div *ngIf="ced3User.errors?.pattern" class="alert alert-danger">
+            <div *ngIf="ced3User.errors?.pattern" class="alert alert-danger" id="a29">
               Cedula no valida. Ingrese solo números
             </div>
-            <div *ngIf="!ced3User.errors?.pattern && !ced3User.errors?.required && ced3User.errors?.minlength" class="alert alert-warning">
+            <div *ngIf="!ced3User.errors?.pattern && !ced3User.errors?.required && ced3User.errors?.minlength" class="alert alert-warning" id="a30">
               Ingrese su cedula completa
             </div>
           </div>
