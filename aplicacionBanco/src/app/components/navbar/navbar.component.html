@@ -24,7 +24,7 @@
         <div class="container">
 
           <button type="button" class="btn btn-primary my-2 my-sm-0" data-toggle="modal" data-target="#registro" 
-          (click)="resetForm(frm); seEncuetraCedula=false; seEncuetraUsuario=false; llave2=false" sid="register">Registrarse </button>
+          (click)="resetForm(frm); seEncuetraCedula=false; seEncuetraUsuario=false; llave2=false" id="register">Registrarse </button>
           <!-- <button class="btn btn-primary my-2 my-sm-0" type="button" data-toggle="modal" data-target="#login">Iniciar Sesión</button> -->
         </div>
       </form>
@@ -207,7 +207,7 @@
         (click)="mostrarCreditos(model2.Cedula)">Ver creditos</button>
        
         <button type="button" class="btn btn-default" data-dismiss="modal" id="botonSolicitud" href="#Scredit" data-toggle="modal"
-        (click)="nuevaSolicitud(frms)" *ngIf="llave2">Crear Nueva Solicitud</button>
+        (click)="nuevaSolicitud()" *ngIf="llave2">Crear Nueva Solicitud</button>
         <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCerrar">Cerrar</button>
       </div>
     </div>

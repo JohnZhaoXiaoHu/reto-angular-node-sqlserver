@@ -235,7 +235,7 @@ export class NavbarComponent implements OnInit {
     
   }
 
-  nuevaSolicitud(form: NgForm){
+  nuevaSolicitud(){
     this.model2.Salario=null;
     this.model2.fecha_Ingreso=" ";
     this.llave=true;
