@@ -174,12 +174,13 @@
               La fecha ingresada no corresponde a una persona mayor de edad.
             </div>
           </div>
-
+          
           <div *ngIf="calUser?.touched">
             <div *ngIf="calUser.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
           </div>
+
           <div class="modal-footer">
-            <button type="button" name="button" class="btn btn-info btn-lg" id="crearCliente"
+            <button type="button" name="button" class="btn btn-info btn-lg" id="crearCliente" [disabled]="frm.invalid || seEncuetraCedula"
               data-toggle="modal" data-target="#Modal" (click)="insertarCliente()" data-dismiss="modal">Crear usuario</button>
             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frm)">Cerrar</button>
           </div>
@@ -196,8 +197,9 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <div class="modal-body">
-        <p>{{mensajeModal}}</p>
+      <div class="modal-body text-center">
+        <br><br> <h2 style="color:#0fad00">Success</h2>
+        <p>{{mensajeModal2}}</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" id="ok">Cerrar</button>
@@ -290,8 +292,8 @@
         <h4 class="modal-title">Solicitud de crédito</h4>
       </div>
       <div class="modal-body">
-        <form #frms="ngForm" (ngSubmit)="Login(frms)">
-
+        <form #frms="ngForm" (ngSubmit)="login(frms)">
+          
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Cédula
             </label>
@@ -320,7 +322,7 @@
               Ingrese su cédula completa
             </div>
           </div>
-
+          
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Empresa:
             </label>
@@ -410,6 +412,7 @@
               </div>
             </div>
             -->
+            
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
             <input type="date" name="fecha" max="{{fechactual1}}" id="calendari" #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
@@ -442,7 +445,7 @@
           <h4 class="modal-title">Listar créditos</h4>
         </div>
         <div class="modal-body">
-          <form #frms="ngForm" (ngSubmit)="Login(frms)">
+          <form #formcre="ngForm" (ngSubmit)="Login(formcre)">
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Ingrese cédula</label>
             <input type="text" name="cedula3" class="form-control" #ced3User="ngModel" ngModel required id="cedula3" placeholder="ingrese minimo 6 digitos del 0 al 9 y maximo 10"
@@ -467,7 +470,7 @@
           </div>
             <div class="modal-footer">
               <button type="button" data-target="" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-                id="listarCreditos" [disabled]="frms.invalid || !seEncuentraCedulaCredito"  >Listar mis créditos</button>
+                id="listarCreditos" [disabled]="formcre.invalid || !seEncuentraCedulaCredito"  >Listar mis créditos</button>
               <button type="button" class="btn btn-default" data-dismiss="modal" (click)="mostrarCreditos()">Cerrar</button>
             </div>
           </form>

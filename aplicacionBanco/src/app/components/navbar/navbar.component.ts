@@ -18,7 +18,8 @@ export class NavbarComponent implements OnInit {
   clientes: Cliente[];
 
   mensajeUsuarioCliente = "Este campo es requerido";
-  mensajeModal = "";
+  mensajeModal1 = "";
+  mensajeModal2 = "";
   mensajeCedulaSolicitud = "";
   mostrarMensaje: boolean = false;
   mostrarMensaje2: boolean = false;
@@ -61,7 +62,7 @@ export class NavbarComponent implements OnInit {
   }
 
   insertarSolicitud() {
-    this.mensajeModal = "";
+    this.mensajeModal2 = "";
     //this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
 
@@ -76,16 +77,16 @@ export class NavbarComponent implements OnInit {
         if (this.antiguedadAñoYmedio() && this.model2.Salario >= 800000) {
           let prestamo: string;
 
-          this.mensajeModal = "Credito aceptado";
+          this.mensajeModal2 = "Credito aceptado";
           if (this.model2.Salario >= 800000 && this.model2.Salario < 1000000) {
             prestamo = '5.000.000';
-            this.mensajeModal += "\n por el monto de $ 5.000.000";
+            this.mensajeModal2 += "\n por el monto de $ 5.000.000";
           } else if (this.model2.Salario >= 1000000 && this.model2.Salario < 4000000) {
             prestamo = '20.000.000';
-            this.mensajeModal += "\n por el monto de $ 20.000.000";
+            this.mensajeModal2 += "\n por el monto de $ 20.000.000";
           } else if (this.model2.Salario >= 4000000) {
             prestamo = '50.000.000';
-            this.mensajeModal += "\n por el monto de $ 50.000.000";
+            this.mensajeModal2 += "\n por el monto de $ 50.000.000";
 
           }
           console.log("fecha creacion solicitud:" + this.model2.fecha_Creacion);
@@ -96,7 +97,7 @@ export class NavbarComponent implements OnInit {
           this.insertarCredito();
           //console.log("solicitud creada exitosamente!!");
         } else {
-          this.mensajeModal = "Credito no aceptado";
+          this.mensajeModal2 = "Credito no aceptado";
         }
 
       });
@@ -114,7 +115,7 @@ export class NavbarComponent implements OnInit {
       this.postService.insertCliente(this.model).subscribe(posts => {
         console.log("respuesta del server:" + posts);
         this.check = posts;
-        this.mensajeModal = "Usuario ingresado exitosamente!!";
+        this.mensajeModal2 = this.model.Nombre+" "+this.model.Apellido+" has sido agregado exitosamente";
         this.cedLastUserReg = this.model.Cedula;
 
       });
