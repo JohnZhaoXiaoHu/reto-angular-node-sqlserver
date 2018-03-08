@@ -22,31 +22,30 @@ export class NavbarComponent implements OnInit {
   mensajeModal1 = "";
   mensajeModal2 = "";
   mensajeCedulaSolicitud = "";
-  mostrarMensaje: boolean = false;
-  mostrarMensaje2: boolean = false;
 
   check: Cliente;
+  check2: Solicitud;
   model: any = {};
   model2: any = {};
   model3: any = {};
-  check2: Solicitud;
+  
   seEncuetraCedula: boolean = false;
   seEncuetraUsuario: boolean = false;
   seEncuentraCedulaSolicitud: boolean = false;
   seEncuentraSalario: boolean = true;
   seEncuentraCedulaCredito: boolean = false;
 
-  nit1: string;
-  nit2: string;
-  nit3: string;
-  nit4: string;
   fechactual: string;
   mayor18: boolean;
   fechactual1: string;
+  
   credito: Credito = { id_Solicitud: "", Cedula: "", Cantidad: "", fecha_Creacion: "" };
-  cedLastUserReg: String;
-  colorMen: String;
+  cedLastUserReg: String = "";
 
+  colorMen: String;
+  llave: boolean=false;
+  llave2: boolean=false;
+  
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
   @Output() messageEvent = new EventEmitter<boolean>();
@@ -213,6 +212,13 @@ export class NavbarComponent implements OnInit {
     this.messageEvent.emit(false);
     console.log("mensaje enviado");
   }
+
+  nuevaSolicitud(form: NgForm){
+    this.model2.Salario=null;
+    this.model2.fecha_Ingreso=" ";
+    this.llave=true;
+  }
+
   ngOnInit() {
 
     this.fechactual = new Date().toString();
@@ -261,8 +267,6 @@ export class NavbarComponent implements OnInit {
 
 
   }
-
-
 
   vte: boolean;
   fecha3: Date;
