@@ -29,6 +29,7 @@ export class NavbarComponent implements OnInit {
   model: any = {};
   model2: any = {};
   model3: any = {};
+  ced1: string;
   
   seEncuetraCedula: boolean = false;
   seEncuetraUsuario: boolean = false;
@@ -212,10 +213,13 @@ export class NavbarComponent implements OnInit {
   }
 
   mostrarCreditos(cedula:string){
+    console.log("cedula:"+cedula);
     this.messageEvent.emit(false);
     console.log("mensaje enviado");
-    this.enviarDatosCreditos(this.model2.Cedula);
+    this.enviarDatosCreditos(cedula);
   }
+
+  
 
 
   enviarDatosCreditos(cedula:string){
