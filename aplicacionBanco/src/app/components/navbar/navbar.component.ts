@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit {
   insertarSolicitud() {
     this.mensajeModal1 = "";
     this.mensajeModal2 = "";
+    this.cedLastUserReg = this.model2.Cedula;
     //this.model2.nit_Empresa = this.nit1 + "" + this.nit2 + "" + this.nit3 + "-" + this.nit4;
     //console.log("nit de la empresa:" + this.model2.nit_Empresa);
 
@@ -83,6 +84,7 @@ export class NavbarComponent implements OnInit {
           let prestamo: string;
           this.mensajeModal1 = "Crédito aprobado";
           this.colorMen="#0fad00";          
+          this.llave2=true;
 
           if (this.model2.Salario >= 800000 && this.model2.Salario < 1000000) {
             prestamo = '5.000.000';
@@ -105,6 +107,8 @@ export class NavbarComponent implements OnInit {
         } else {
           this.mensajeModal1 = "Crédito no aprobado";
           this.colorMen="red";
+          this.llave2=false;
+
           if(!this.antiguedadAñoYmedio()){
             this.mensajeModal2 = "Debido a que no lleva trabajando más de un año y medio";
           }
