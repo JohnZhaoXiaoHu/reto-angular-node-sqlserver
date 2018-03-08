@@ -26,147 +26,50 @@
     </tbody>
   </table>
   <div class="modal-footer">
-    <button type="button" data-target="#Scredit" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-      id="nuevoCredito">Solicitar nuevo crédito</button>
+    <button type="button" data-target="#Scredit1" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
+      id="nuevoCredito" (click)="resetForm(frms)">Solicitar nuevo crédito</button>
     <button type="button" class="btn btn-default" data-dismiss="modal"(click)="mostrarHome()">Atras</button>
   </div>
 </div>
 
-<!--solicitaar credito-->
-<div class="modal fade" id="Scredit" role="dialog">
+<!--solicitar nuevo credito-->
+<div class="modal fade" id="Scredit1" role="dialog">
   <div class="modal-dialog">
-
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">Solicitud de crédito</h4>
       </div>
       <div class="modal-body">
-        <form #frms="ngForm" (ngSubmit)="login(frms)">
-          
-          <div class="form-group">
-            <label for="recipient-name" class="form-control-label">Cédula
-            </label>
-
-            <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cédula"
-              pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedulaSolicitud()"
-              (click)="seEncuentraCedulaSolicitud=true" maxlength="12">
-
-            <p id="cedula2"></p>
-          </div>
-
-          <div *ngIf="!seEncuentraCedulaSolicitud" class="alert alert-danger">
-            Esta cédula no se encuentra registrada en el sistema
-          </div>
-
-          <div *ngIf="ced2User?.touched">
-            <div *ngIf="ced2User.errors?.required" class="alert alert-danger">Este campo es requerido</div>
-          </div>
-
-          <div *ngIf="ced2User?.dirty">
-            <div *ngIf="ced2User.errors?.pattern" class="alert alert-danger">
-              Cédula no válida. Ingrese solo números
-            </div>
-
-            <div *ngIf="!ced2User.errors?.pattern && !ced2User.errors?.required && ced2User.errors?.minlength" class="alert alert-warning">
-              Ingrese su cédula completa
-            </div>
-          </div>
-          
+        <form #frms="ngForm" (ngSubmit)="login(frms)">        
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Empresa:
             </label>
-            <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese el nombre de la empresa"
-              name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*"
-              maxlength="30">
+            <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa1" 
+              name="nombre_Empresa"  [(ngModel)]="model4.Empresa" disabled>
             <p id="NEmp"></p>
           </div>
-
-          <div *ngIf="EmpCli?.touched">
-            <div *ngIf="EmpCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
-          </div>
-
-          <div *ngIf="EmpCli?.dirty">
-
-            <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger">
-
-              Nombre no válido. Ingrese solo letras
-            </div>
-          </div>
-          
-          <!-- inicio  campo del nit de la empresa -->
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
-            <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel [(ngModel)]="model2.nit_Empresa" id="NIT"  
-            name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" required placeholder="Ingrese el nit de la empresa">
+            <input #NitCli="ngModel" type="serialnumber"   class="form-control" ngModel [(ngModel)]="model4.nit_Empresa" id="NIT1"  
+            name="nit_Empresa"    disabled>
           </div>
-
-          <div *ngIf="NitCli?.touched">
-            <div *ngIf="NitCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
-          </div>
-          <div *ngIf="NitCli?.dirty">
-              <div *ngIf="NitCli.errors?.minlength" class="alert alert-danger">
-                  Ingrese el Nit completo
-              </div>
-            </div>
-          
-          <!-- fin campo del nit de la empresa -->
-
-          <!-- inicio  validaciones del nit de la emprsa -->
-          <!--
-          <div *ngIf="NitCli0?.touched || NitCli1?.touched || NitCli2?.touched || NitCli3?.touched">
-            <div *ngIf="NitCli0.errors?.required || NitCli1.errors?.required || NitCli2.errors?.required || NitCli3.errors?.required "
-              class="alert alert-danger"> Este campo es requerido</div>
-          </div>
-
-          <div *ngIf="NitCli0.dirty || NitCli1.dirty || NitCli2.dirty || NitCli3.dirty">
-
-            <div *ngIf="NitCli0.errors?.pattern || NitCli1.errors?.pattern || NitCli2.errors?.pattern || NitCli3.errors?.pattern" class="alert alert-danger">
-
-              Nit no válido. Ingrese solo números
-            </div>
-
-            <div *ngIf="!NitCli0.errors?.pattern && !NitCli0.errors?.required && NitCli0.errors?.minlength || !NitCli1.errors?.pattern && !NitCli1.errors?.required && NitCli1.errors?.minlength || !NitCli2.errors?.pattern && !NitCli2.errors?.required && NitCli2.errors?.minlength || !NitCli3.errors?.pattern && !NitCli3.errors?.required && NitCli3.errors?.minlength"
-              class="alert alert-warning">
-
-              Ingrese el Nit completo
-            </div>
-          </div>
-          -->
-
-          <!-- fin validaciones nit empresa -->
 
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Salario actual:
             </label>
-            <input #moneyCli="ngModel" currencyMask ngModel type="text" class="form-control" id="money" placeholder="Ingrese salario (máximo de $ 99.999.999)"
-              name="salario" required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model2.Salario" maxlength="15" (blur)="salarioVacio()" (keyup)="salarioVacio()">
+            <input #moneyCli1="ngModel" currencyMask ngModel type="text" class="form-control" id="money1" placeholder="Ingrese salario (máximo de $ 99.999.999)"
+               required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model4.Salario1" name="salario1" maxlength="15" (blur)="salarioVacio1()" (keyup)="salarioVacio1()">
             <p id="money"></p>
           </div>
 
-          <div *ngIf="!seEncuentraSalario" class="alert alert-danger">
+          <div *ngIf="!seEncuentraSalario1" class="alert alert-danger">
             Este campo es requerido
-          </div>
-
-          <!-- 
-          <div *ngIf="moneyCli?.touched">
-            <div *ngIf="moneyCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
-          </div>
-           -->
-          <!--  
-            <div *ngIf="moneyCli?.dirty">
-              <div *ngIf="moneyCli.errors?.pattern" class="alert alert-danger">
-  
-                Salario no válido. Ingrese solo números enteros y positivos
-              </div>
-            </div>
-            -->
-            
+          </div>          
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
-            <input type="date" name="fecha" max="{{fechactual1}}" id="calendari" #dateCli="ngModel" ngModel required [(ngModel)]="model2.fecha_Ingreso">
-            <p id="fecha"></p>
+            <input type="date" name="fecha"  id="calendario1" #dateCli="ngModel" ngModel required [(ngModel)]="model4.fecha_Ingreso" >
+            <p id="fecha1"></p>
           </div>
 
           <div *ngIf="dateCli?.touched">
@@ -175,7 +78,7 @@
 
           <div class="modal-footer">
             <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal"
-              id="realizarSolicitud" [disabled]="frms.invalid || !seEncuentraCedulaSolicitud || !seEncuentraSalario" (click)="insertarSolicitud()">Realizar Solicitud</button>
+              id="realizarSolicitud1" [disabled]="frms.invalid ||  !seEncuentraSalario1" >Realizar Solicitud</button>
 
             <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms); mostrarMensaje=false">Cerrar</button>
           </div>
