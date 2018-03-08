@@ -22,4 +22,66 @@
       </tr>
     </tbody>
   </table>
+  <div class="modal-footer">
+    <button type="button" data-target="#Scredit1" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
+      id="nuevoCredito" (click)="resetForm(frms)">Solicitar nuevo crédito</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal"(click)="mostrarHome()">Atras</button>
+  </div>
+</div>
+
+<!--solicitar nuevo credito-->
+<div class="modal fade" id="Scredit1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Solicitud de crédito</h4>
+      </div>
+      <div class="modal-body">
+        <form #frms="ngForm" (ngSubmit)="login(frms)">        
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Empresa:
+            </label>
+            <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa1" 
+              name="nombre_Empresa"  [(ngModel)]="model4.Empresa" disabled>
+            <p id="NEmp"></p>
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Nit Empresa:
+            </label>
+            <input #NitCli="ngModel" type="serialnumber"   class="form-control" ngModel [(ngModel)]="model4.nit_Empresa" id="NIT1"  
+            name="nit_Empresa"    disabled>
+          </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Salario actual:
+            </label>
+            <input #moneyCli1="ngModel" currencyMask ngModel type="text" class="form-control" id="money1" placeholder="Ingrese salario (máximo de $ 99.999.999)"
+               required title="Solo debe ingresar números enteros y positivos" [(ngModel)]="model4.Salario1" name="salario1" maxlength="15" (blur)="salarioVacio1()" (keyup)="salarioVacio1()">
+            <p id="money"></p>
+          </div>
+
+          <div *ngIf="!seEncuentraSalario1" class="alert alert-danger">
+            Este campo es requerido
+          </div>          
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Fecha de ingreso a la empresa:</label>
+            <input type="date" name="fecha"  id="calendario1" #dateCli="ngModel" ngModel required [(ngModel)]="model4.fecha_Ingreso" >
+            <p id="fecha1"></p>
+          </div>
+
+          <div *ngIf="dateCli?.touched">
+            <div *ngIf="dateCli.errors?.required" class="alert alert-danger"> Este campo es requerido</div>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" data-target="#Modal" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal"
+              id="realizarSolicitud1" [disabled]="frms.invalid ||  !seEncuentraSalario1" >Realizar Solicitud</button>
+
+            <button type="button" class="btn btn-default" data-dismiss="modal" (click)="resetForm(frms); mostrarMensaje=false">Cerrar</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
 </div>

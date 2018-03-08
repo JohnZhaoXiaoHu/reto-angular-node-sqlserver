@@ -9,7 +9,8 @@
   <app-marketing [ocultarMarketing]="ocultarMarketing"></app-marketing>
 </div>
 <div class="container">
-  <app-table [ocultarTable]="ocultarTable"  [creditoCliente]="creditoCliente"> </app-table>
+  <app-table [ocultarTable]="ocultarTable" [creditoCliente]="creditoCliente" (messageEvent)="receiveMessage($event)"> </app-table>
+
 </div>
 
 
