@@ -14,7 +14,7 @@
             aria-expanded="false">Servicios Cliente</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
             <a class="dropdown-item" data-toggle="modal" href="#Scredit" (click)="resetForm(frms); seEncuentraCedulaSolicitud=true; 
-            seEncuentraSalario=true; this.model2.Cedula=this.cedLastUserReg; llave=false" >Solicitar Crédito</a>
+            seEncuentraSalario=true; this.model2.Cedula=this.cedLastUserReg; llave=false" [hidden]="tablaActiva" >Solicitar Crédito</a>
 
             <a class="dropdown-item" style="cursor:pointer "  data-toggle="modal" data-target="#Lcredit" (click)="resetForm(formcre); 
             seEncuentraCedulaCredito=true">Créditos aprobados</a>
@@ -360,10 +360,10 @@
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
             <br>
-            <input id="check1" type="checkbox" [checked]="checkNit" (change)="checkNit = !checkNit; cambiarNitJ()"> 
+            <input id="check1" type="checkbox" [checked]="checkNit" (change)="checkNit = !checkNit; cambiarNitJ()" [disabled]="llave"> 
             <label for="recipient-name" class="form-control-label">Persona Juridica &nbsp;</label> 
             
-            <input id="check2" type="checkbox" [checked]="!checkNit" (change)="checkNit = !checkNit; cambiarNitN()"> 
+            <input id="check2" type="checkbox" [checked]="!checkNit" (change)="checkNit = !checkNit; cambiarNitN()" [disabled]="llave"> 
             <label for="recipient-name" class="form-control-label">Persona Natural</label>
             <br>
             
