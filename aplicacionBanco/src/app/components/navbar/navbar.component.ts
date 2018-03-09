@@ -154,11 +154,13 @@ export class NavbarComponent implements OnInit {
   }
 
   resetFormSolicitud(form: NgForm){
+    console.log(this.tablaActiva);
      if(!this.tablaActiva){
       form.resetForm();
      }else{
-       this.model2.Salario="";
-       this.model2.fecha_Ingreso=" ";
+      this.model2.Salario=null;
+      this.model2.fecha_Ingreso=" ";
+      this.llave=true;
      }
   }
 
@@ -249,7 +251,7 @@ export class NavbarComponent implements OnInit {
     this.model2.Salario=null;
     this.model2.fecha_Ingreso=" ";
     this.llave=true;
-    console.log("nueva solicitud 1");
+    //console.log("nueva solicitud 1");
   }
 
   cambiarNitJ(){
