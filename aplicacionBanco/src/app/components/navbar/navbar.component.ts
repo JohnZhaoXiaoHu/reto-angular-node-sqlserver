@@ -42,7 +42,7 @@ export class NavbarComponent implements OnInit {
   fechactual1: string;
   
   credito: Credito = { id_Solicitud: "", Cedula: "", Cantidad: "", fecha_Creacion: "" };
-  cedLastUserReg: String = "";
+  cedLastUserReg: String = null;
 
   colorMen: String;
   llave: boolean=false;
@@ -237,10 +237,23 @@ export class NavbarComponent implements OnInit {
     //console.log("mensaje enviado");
     this.enviarDatosCreditos(cedula);
 
-
     this.model2.Salario = null;
     this.model2.fecha_Ingreso = " ";
     this.llave = true;
+  }
+  mostrarCreditos2(cedula:string){
+    //console.log("cedula:"+cedula);
+    this.messageEvent.emit(false);
+    this.tablaActiva=true;
+    //console.log("mensaje enviado");
+    this.enviarDatosCreditos(cedula);
+
+    this.model2.Cedula=this.model3.Cedula;
+    //this.model2.Empresa = null;
+    //this.model2.nit_Empresa = null;
+    this.model2.Salario = null;
+    this.model2.fecha_Ingreso = " ";
+    this.llave = false;
   }
 
 
