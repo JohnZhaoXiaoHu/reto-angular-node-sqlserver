@@ -90,7 +90,7 @@
 
             <input type="text" name="cedula" class="form-control" #cedUser="ngModel" ngModel required id="cedula" placeholder="Ingrese Cédula"
               pattern="[0-9]*" title="Solo debe ingresar números" (click)="seEncuetraCedula=false" (blur)="verificarCedulaCliente()"
-              maxlength="12" minlength="6" [(ngModel)]="model.Cedula">
+              maxlength="10" minlength="6" [(ngModel)]="model.Cedula">
 
             <p id="cedula"></p>
           </div>
@@ -210,7 +210,7 @@
         <button type="button" class="btn btn-default" data-dismiss="modal" id="botonSolicitud" href="#Scredit" data-toggle="modal"
         (click)="nuevaSolicitud()" *ngIf="llave2">Crear Nueva Solicitud</button>
         
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCerrar" (click)="resetFormSolicitud(frms)">Cerrar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="botonCerrar" (click)="resetFormSolicitud(frms); messageEvent.emit(true)">Cerrar</button>
       </div>
     </div>
 
@@ -308,7 +308,7 @@
 
             <input type="text" name="cedula2" class="form-control" #ced2User="ngModel" ngModel required id="cedula2" placeholder="Ingrese Cédula"
               pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" [(ngModel)]="model2.Cedula" (blur)="verificarCedulaSolicitud()"
-              (click)="seEncuentraCedulaSolicitud=true" maxlength="12" [disabled]="llave">
+              (click)="seEncuentraCedulaSolicitud=true" maxlength="10" [disabled]="llave">
 
             <p id="cedula2"></p>
           </div>
@@ -469,24 +469,24 @@
           <form #formcre="ngForm" (ngSubmit)="Login(formcre)">
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Ingrese cédula</label>
-            <input type="text" name="cedula3" class="form-control" #ced3User="ngModel" ngModel required id="cedula3" placeholder="ingrese minimo 6 digitos del 0 al 9 y maximo 10"
+            <input type="text" name="cedula3" class="form-control" #ced3User="ngModel" ngModel required id="cedula3" placeholder="Ingrese mínimo 6 dígitos del 0 al 9 y máximo 10"
               pattern="[0-9]*" title="Solo debe ingresar números" minlength="6" maxlength="10" [(ngModel)]="model3.Cedula" (blur)="verificarCedulaCredito()"
               (click)="seEncuentraCedulaCredito=true"> 
             <p id="cedula2"></p>
           </div>
           <!-- validaciones  -->       
           <div *ngIf="!seEncuentraCedulaCredito"  class="alert alert-danger" id="a27">
-            No se encuentra cedula
+            No se encuentra cédula
           </div>
           <div *ngIf="ced3User?.touched">
             <div *ngIf="ced3User.errors?.required" class="alert alert-danger" id="a28">Este campo es requerido</div>
           </div>
           <div *ngIf="ced3User?.dirty">
             <div *ngIf="ced3User.errors?.pattern" class="alert alert-danger" id="a29">
-              Cedula no valida. Ingrese solo números
+              Cédula no válida. Ingrese solo números
             </div>
             <div *ngIf="!ced3User.errors?.pattern && !ced3User.errors?.required && ced3User.errors?.minlength" class="alert alert-warning" id="a30">
-              Ingrese su cedula completa
+              Ingrese su cédula completa
             </div>
           </div>
             <div class="modal-footer">

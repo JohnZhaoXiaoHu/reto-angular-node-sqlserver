@@ -11,7 +11,7 @@ import {CreditoCliente} from './app.component'
 
 @Injectable()
 export class PostService {
-  IP: string = "localhost";
+  IP: string = "192.168.3.158";
   constructor(private http: HttpClient){}
 
   getPost(): Observable<Cliente[]> {
