@@ -48,7 +48,7 @@
             <label for="recipient-name" class="form-control-label">Nombre:
             </label>
             <input type="text" name="name" class="form-control" #nameUser="ngModel" ngModel required id="nombre" placeholder="Ingrese Nombre"
-              pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Nombre" >
+              pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s?[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Nombre" >
             <p id="Nombre"></p>
           </div>
 
@@ -60,7 +60,7 @@
 
             <div *ngIf="nameUser.errors?.pattern" class="alert alert-danger" id="a2">
 
-              Nombre no válido. Ingrese solo letras
+              Nombre no válido. Ingrese solo letras. Solo puede ingresar un espacio entre nombres
             </div>
           </div>
 
@@ -68,7 +68,7 @@
             <label for="recipient-name" class="form-control-label">Apellido:
             </label>
             <input type="text" name="lastname" class="form-control" #lastnameUser="ngModel" ngModel required id="apellido" placeholder="Ingrese Apellido"
-              pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Apellido">
+              pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s?[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$" title="Solo debe ingresar letras" maxlength="30" [(ngModel)]="model.Apellido">
             <p id="Apellido"></p>
           </div>
 
@@ -80,7 +80,7 @@
 
             <div *ngIf="lastnameUser.errors?.pattern" class="alert alert-danger" id="a4">
 
-              Apellido no válido. Ingrese solo letras
+              Apellido no válido. Ingrese solo letras. Solo puede ingresar un espacio entre apellidos
             </div>
           </div>
 
@@ -335,8 +335,8 @@
             <label for="recipient-name" class="form-control-label">Empresa:
             </label>
             <input type="text" class="form-control" #EmpCli="ngModel" ngModel id="empresa" placeholder="Ingrese el nombre de la empresa"
-              name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" pattern="[A-Za-zñÑáéíóúÁÉÍÓÚ ]*"
-              maxlength="30" [disabled]="llave">
+              name="nombre_Empresa" required title="Nombre de la empresa" [(ngModel)]="model2.Empresa" maxlength="30" [disabled]="llave"
+              pattern="^[a-zA-ZñÑáéíóúÁÉÍÓÚ]+\s?[a-zA-ZñÑáéíóúÁÉÍÓÚ]+$">
             <p id="NEmp"></p>
           </div>
 
@@ -348,7 +348,7 @@
 
             <div *ngIf="EmpCli.errors?.pattern" class="alert alert-danger" id="a22">
 
-              Nombre no válido. Ingrese solo letras
+              Nombre no válido. Ingrese solo letras. Solo puede ingresar un espacio
             </div>
           </div>
           
