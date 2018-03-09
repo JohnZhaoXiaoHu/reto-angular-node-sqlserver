@@ -47,7 +47,9 @@ export class NavbarComponent implements OnInit {
   colorMen: String;
   llave: boolean=false;
   llave2: boolean=false;
-  
+  checkN1: boolean=true;
+  checkN2: boolean=false;
+
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
   @Output() messageEvent = new EventEmitter<boolean>();
@@ -239,6 +241,12 @@ export class NavbarComponent implements OnInit {
     this.model2.Salario=null;
     this.model2.fecha_Ingreso=" ";
     this.llave=true;
+  }
+
+  cambiarNit1(){
+
+  }
+  cambiarNit2(){
 
   }
 

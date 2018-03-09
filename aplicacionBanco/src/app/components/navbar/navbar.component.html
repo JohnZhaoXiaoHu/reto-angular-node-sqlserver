@@ -350,10 +350,19 @@
             </div>
           </div>
           
+
+
+
           <!-- inicio  campo del nit de la empresa -->
           <div class="form-group">
             <label for="recipient-name" class="form-control-label">Nit Empresa:
             </label>
+            <br>
+            <input id="check1" type="checkbox" [checked]="saveUsername" (change)="saveUsername = !saveUsername"> <label for="recipient-name" class="form-control-label">Persona Juridica &nbsp;</label> 
+            
+            <input id="check2" type="checkbox" [checked]="!saveUsername" (change)="saveUsername = !saveUsername"> <label for="recipient-name" class="form-control-label">Persona Natural</label>
+            <br>
+            
             <input #NitCli="ngModel" type="serialnumber" [textMask]="{mask: mask, guide: false}"  class="form-control" ngModel 
             [(ngModel)]="model2.nit_Empresa" id="NIT" name="nit_Empresa" minlength="13" maxlength="14" title="Solo debe ingresar números" 
             required placeholder="Ingrese el nit de la empresa" [disabled]="llave">
