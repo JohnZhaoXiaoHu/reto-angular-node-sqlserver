@@ -11,35 +11,36 @@ import {CreditoCliente} from './app.component'
 
 @Injectable()
 export class PostService {
+  IP: string = "localhost";
   constructor(private http: HttpClient){}
 
   getPost(): Observable<Cliente[]> {
-    return this.http.get<Cliente[]>('http://localhost:8080/cliente');
+    return this.http.get<Cliente[]>('http://'+this.IP+':8080/cliente');
   }
   
   insertCliente(cliente: Cliente): Observable<Cliente> {
-    return this.http.post<Cliente>('http://localhost:8080/cliente/create', cliente);
+    return this.http.post<Cliente>('http://'+this.IP+':8080/cliente/create', cliente);
   }
 
   getCredito(): Observable<Credito[]> {
-    return this.http.get<Credito[]>('http://localhost:8080/credito');
+    return this.http.get<Credito[]>('http://'+this.IP+':8080/credito');
   }
   
   insertCredito(credito: Credito): Observable<Credito> {
-    return this.http.post<Credito>('http://localhost:8080/credito/create', credito);
+    return this.http.post<Credito>('http://'+this.IP+':8080/credito/create', credito);
   }
 
 
   insertSolicitud(solicitud: Solicitud): Observable<Solicitud> {
-    return this.http.post<Solicitud>('http://localhost:8080/solicitud/create', solicitud);
+    return this.http.post<Solicitud>('http://'+this.IP+':8080/solicitud/create', solicitud);
   }
 
   buscarClientePorCedula(cedula:string){
-    return this.http.get('http://localhost:8080/cliente/cedula/'+cedula);
+    return this.http.get('http://'+this.IP+':8080/cliente/cedula/'+cedula);
   }
 
   getCreditosPorCedula(cedula:string):Observable<CreditoCliente[]>{
-    return this.http.get<CreditoCliente[]>('http://localhost:8080/credito/cedula/'+cedula);
+    return this.http.get<CreditoCliente[]>('http://'+this.IP+':8080/credito/cedula/'+cedula);
   }
 
 }
