@@ -50,9 +50,10 @@ export class NavbarComponent implements OnInit {
   checkNit: boolean=true;
   minLongNit: number = 13;
 
-  tablaActiva:boolean=false;
+  @Input() tablaActiva:boolean=false;
 
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
+
 
   @Output() messageEvent = new EventEmitter<boolean>();
   @Output() datos = new EventEmitter<CreditoCliente[]>();
@@ -230,11 +231,16 @@ export class NavbarComponent implements OnInit {
   }
 
   mostrarCreditos(cedula:string){
-    console.log("cedula:"+cedula);
+    //console.log("cedula:"+cedula);
     this.messageEvent.emit(false);
     this.tablaActiva=true;
-    console.log("mensaje enviado");
+    //console.log("mensaje enviado");
     this.enviarDatosCreditos(cedula);
+
+
+    this.model2.Salario = null;
+    this.model2.fecha_Ingreso = " ";
+    this.llave = true;
   }
 
 

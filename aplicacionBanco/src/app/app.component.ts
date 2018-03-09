@@ -16,12 +16,14 @@ export class AppComponent {
   ocultarCarrusel= true;
   ocultarMarketing = true;
   ocultarTable = false;
+  tablaActiva=false;
   creditoCliente:CreditoCliente[];
 
   receiveMessage($event) {
     this.ocultarCarrusel = $event;
     this.ocultarMarketing = $event;
     this.ocultarTable = !$event;
+    this.tablaActiva= !$event;
   }
 
   recibirDatos($event){

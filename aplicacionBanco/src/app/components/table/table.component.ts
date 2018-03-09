@@ -28,6 +28,7 @@ export class TableComponent implements OnInit {
 
   mostrarHome(){
     this.messageEvent.emit(true);
+    this.NavbarComponent.tablaActiva=false;
     console.log("mensaje enviado");
   }
 
