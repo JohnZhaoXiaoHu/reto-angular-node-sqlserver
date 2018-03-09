@@ -23,7 +23,7 @@ export class NavbarComponent implements OnInit {
   mensajeModal1 = "";
   mensajeModal2 = "";
   mensajeCedulaSolicitud = "";
-
+  
   check: Cliente;
   check2: Solicitud;
   model: any = {};
@@ -49,6 +49,8 @@ export class NavbarComponent implements OnInit {
   llave2: boolean=false;
   checkNit: boolean=true;
   minLongNit: number = 13;
+
+  tablaActiva:boolean=false;
 
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
@@ -151,7 +153,14 @@ export class NavbarComponent implements OnInit {
     form.resetForm(); // or form.reset();
   }
 
-
+  resetFormSolicitud(form: NgForm){
+     if(!this.tablaActiva){
+      form.resetForm();
+     }else{
+       this.model2.Salario="";
+       this.model2.fecha_Ingreso=" ";
+     }
+  }
 
   verificarCedulaCliente() {
     this.seEncuetraCedula = false;
@@ -221,11 +230,10 @@ export class NavbarComponent implements OnInit {
   mostrarCreditos(cedula:string){
     console.log("cedula:"+cedula);
     this.messageEvent.emit(false);
+    this.tablaActiva=true;
     console.log("mensaje enviado");
     this.enviarDatosCreditos(cedula);
   }
-
-  
 
 
   enviarDatosCreditos(cedula:string){
@@ -241,6 +249,7 @@ export class NavbarComponent implements OnInit {
     this.model2.Salario=null;
     this.model2.fecha_Ingreso=" ";
     this.llave=true;
+    console.log("nueva solicitud 1");
   }
 
   cambiarNitJ(){
@@ -320,7 +329,6 @@ export class NavbarComponent implements OnInit {
     }
     return this.vte;
   }
-
 
 
 }

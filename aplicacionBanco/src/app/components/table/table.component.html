@@ -1,14 +1,14 @@
 <div class="col-md-10 col-md-offset-1" *ngIf="ocultarTable">
-  <h2>Lista de creditos aprobados</h2>
+  <h2>Lista de créditos aprobados</h2>
 </div>
 <div class="col-md-10 col-md-offset-1" *ngIf="ocultarTable"> 
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th scope="col">fecha aprobado</th>
+        <th scope="col">Fecha aprobado</th>
         <th scope="col">Nombre</th>
         <th scope="col">Apellido</th>
-        <th scope="col">Cedula</th>
+        <th scope="col">Cédula</th>
         <th scope="col">Cantidad</th>
       </tr>
     </thead>
@@ -23,13 +23,13 @@
     </tbody>
   </table>
   <div class="modal-footer">
-    <button type="button" data-target="#Scredit1" data-toggle="modal" class="btn btn-info btn-lg" class="btn btn-primary" data-dismiss="modal" 
-      id="nuevoCredito" (click)="resetForm(frms)">Solicitar nuevo crédito</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal"(click)="mostrarHome()">Atras</button>
+    <button type="button" class="btn btn-primary" id="nuevoCredito" href="#Scredit" data-toggle="modal">Solicitar nuevo crédito</button>
+    <button type="button" class="btn btn-default" data-dismiss="modal"(click)="mostrarHome()">Atrás</button>
   </div>
 </div>
 
 <!--solicitar nuevo credito-->
+<!--  
 <div class="modal fade" id="Scredit1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -85,3 +85,4 @@
     </div>
   </div>
 </div>
+-->
