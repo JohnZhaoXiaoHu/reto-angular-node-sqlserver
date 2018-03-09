@@ -47,8 +47,8 @@ export class NavbarComponent implements OnInit {
   colorMen: String;
   llave: boolean=false;
   llave2: boolean=false;
-  checkN1: boolean=true;
-  checkN2: boolean=false;
+  checkNit: boolean=true;
+  minLongNit: number = 13;
 
   public mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
 
@@ -243,10 +243,13 @@ export class NavbarComponent implements OnInit {
     this.llave=true;
   }
 
-  cambiarNit1(){
-
+  cambiarNitJ(){
+    this.mask = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '-', /\d/];
+    this.minLongNit=13;
   }
-  cambiarNit2(){
+  cambiarNitN(){
+    this.mask  = [/\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, '.', /\d/, /\d/, /\d/, /\d/, '-', /\d/];
+    this.minLongNit=14;
 
   }
 
